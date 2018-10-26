@@ -13,10 +13,10 @@ import java.util.Objects;
  */
 public class Course implements Serialize{
     private Integer id;
-    private Srting code;
+    private String code;
     private String title;
 
-    public Course(Integer id, Srting code, String title) {
+    public Course(Integer id, String code, String title) {
         this.id = id;
         this.code = code;
         this.title = title;
@@ -30,11 +30,11 @@ public class Course implements Serialize{
         this.id = id;
     }
 
-    public Srting getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(Srting code) {
+    public void setCode(String code) {
         this.code = code;
     }
 

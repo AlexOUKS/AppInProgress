@@ -5,13 +5,15 @@
  */
 package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entity;
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 /**
  *
  * @author nvince01
  */
-public class CourseSession implements Serialize{
+public class CourseSession implements Serializable {
     private Integer id;
     private Date start_date;
     private Date end_date;
