@@ -5,19 +5,15 @@
  */
 package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
-
-/**
- *
- * @author nvince01
- */
-public class CourseSession implements Serializable {
-    private Integer id;
-    private Date start_date;
-    private Date end_date;
-    private Integer max_students;
+    
+public class CourseSession {
+	
+	private final Integer id;
+    private final Date start_date;
+    private final Date end_date;
+    private final Integer max_students;
 
     public CourseSession(Integer id, Date start_date, Date end_date, Integer max_students) {
         this.id = id;
@@ -30,32 +26,17 @@ public class CourseSession implements Serializable {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public Date getStart_date() {
         return start_date;
     }
-
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date;
-    }
-
+    
     public Date getEnd_date() {
         return end_date;
     }
 
-    public void setEnd_date(Date end_date) {
-        this.end_date = end_date;
-    }
 
     public Integer getMax_students() {
         return max_students;
-    }
-
-    public void setMax_students(Integer max_students) {
-        this.max_students = max_students;
     }
 
     @Override

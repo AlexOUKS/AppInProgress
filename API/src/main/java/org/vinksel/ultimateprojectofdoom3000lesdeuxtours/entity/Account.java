@@ -6,16 +6,11 @@
 package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entity;
 
 import java.util.Objects;
-
-/**
- *
- * @author nvince01
- */
-public class Account implements Serialize {
-    private String username;
-    private String password;
-
-    public Account(String username, String password) {
+public class Account{
+	private final String username;
+	private final String password;
+	
+	Account(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -24,16 +19,8 @@ public class Account implements Serialize {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     @Override

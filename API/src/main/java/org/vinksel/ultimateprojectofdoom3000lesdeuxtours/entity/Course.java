@@ -5,16 +5,12 @@
  */
 package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entity;
 
-import java.util.Objects;
-
-/**
- *
- * @author nvince01
- */
-public class Course implements Serialize{
-    private Integer id;
-    private String code;
-    private String title;
+import java.util.Objects; 
+public class Course{
+	
+	private final String title;
+	private final Integer id;
+	private final String code;
 
     public Course(Integer id, String code, String title) {
         this.id = id;
@@ -26,26 +22,14 @@ public class Course implements Serialize{
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getCode() {
         return code;
     }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
+    
     public String getTitle() {
         return title;
     }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

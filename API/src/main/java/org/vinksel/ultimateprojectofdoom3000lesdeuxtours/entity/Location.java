@@ -7,13 +7,10 @@ package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entity;
 
 import java.util.Objects;
 
-/**
- *
- * @author nvince01
- */
 public class Location {
-    private Integer id;
-    private String city;
+
+	private final Integer id;
+    private final String city;
 
     public Location(Integer id, String city) {
         this.id = id;
@@ -24,16 +21,8 @@ public class Location {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getCity() {
         return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 
     @Override

@@ -5,20 +5,16 @@
  */
 package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entity;
 
-import java.util.Objects;
+import java.util.Objects; 
 
-/**
- *
- * @author nvince01
- */
-public class Client implements Serialize {
-    private Integer id;
-    private String lastname;
-    private String firstname;
-    private String address;
-    private String phone;
-    private String courrielElectronique;
-    private Account account;
+public class Client{
+	private final Integer id;
+	private final String lastname;
+	private final String firstname;
+    private final String address;
+    private final String phone;
+    private final String courrielElectronique;
+    private final Account account;
 
     public Client(Integer id, String lastname, String firstname, String address, String phone, String courrielElectronique, Account account) {
         this.id = id;
@@ -34,56 +30,31 @@ public class Client implements Serialize {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getLastname() {
         return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
     }
 
     public String getFirstname() {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public String getPhone() {
         return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public String getCourrielElectronique() {
         return courrielElectronique;
     }
 
-    public void setCourrielElectronique(String courrielElectronique) {
-        this.courrielElectronique = courrielElectronique;
-    }
 
     public Account getAccount() {
         return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
     }
 
     @Override
