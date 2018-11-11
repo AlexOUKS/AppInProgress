@@ -1,1 +1,5 @@
 /target/
+/app/build/
+/app/node_modules/
+/app/.vscode/
+/API/.vscode/
