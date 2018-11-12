@@ -2,7 +2,11 @@
 <!DOCTYPE hibernate-mapping PUBLIC
       "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
           "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<<<<<<< HEAD:API/src/main/java/org/vinksel/ultimateprojectofdoom3000lesdeuxtours/entities/User.hbm.xml
 <hibernate-mapping package="org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.User">
+=======
+<hibernate-mapping package="org.vinksel.ultimateprojectofdoom3000lesdeuxtours.hibernate">
+>>>>>>> 9777e1f618482d22b0390ad85078192d4fc323bb:API/src/main/java/org/vinksel/ultimateprojectofdoom3000lesdeuxtours/hibernate/User.hbm.xml
 	<class name="User" table="user">
 		<id name="id" column="id">
 		    <generator class="identity"/>
