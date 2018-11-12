@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Course;
 
+import com.google.gson.Gson;
+
 @RestController
 
 public class SessionController {
@@ -22,7 +24,8 @@ public class SessionController {
 		Session session = sf.openSession();
 		Query qry = session.createQuery("from course c");
 		List l =qry.list();
-		return null;
+		String json = new Gson().toJson(l );
+		return json;
 	}
 	
 }
