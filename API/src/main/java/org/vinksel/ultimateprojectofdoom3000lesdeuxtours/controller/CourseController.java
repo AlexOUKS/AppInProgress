@@ -9,10 +9,10 @@ import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entity.Course;
 
 @RestController
 public class CourseController {
-	@RequestMapping("/courses")
+	@RequestMapping("/courses") 
 	public ArrayList<Course> courses(@RequestParam(value="code", defaultValue="all") String code, 
-									 @RequestParam(value="name", defaultValue="all") String name,
-									 @RequestParam(value="id", defaultValue="all") String id){
+									 @RequestParam(value="name", defaultValue="all") String name)
+	{
 		return null;
 	}
 }

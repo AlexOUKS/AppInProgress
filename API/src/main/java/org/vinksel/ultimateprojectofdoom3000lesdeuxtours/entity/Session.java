@@ -8,14 +8,14 @@ package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entity;
 import java.util.Date;
 import java.util.Objects;
     
-public class CourseSession {
+public class Session {
 	
 	private final Integer id;
     private final Date start_date;
     private final Date end_date;
     private final Integer max_students;
 
-    public CourseSession(Integer id, Date start_date, Date end_date, Integer max_students) {
+    public Session(Integer id, Date start_date, Date end_date, Integer max_students) {
         this.id = id;
         this.start_date = start_date;
         this.end_date = end_date;
@@ -50,7 +50,7 @@ public class CourseSession {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final CourseSession other = (CourseSession) obj;
+        final Session other = (Session) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }

@@ -7,23 +7,25 @@ package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entity;
 
 import java.util.Objects; 
 
-public class Client{
+public class User{
 	private final Integer id;
 	private final String lastname;
 	private final String firstname;
     private final String address;
     private final String phone;
     private final String courrielElectronique;
-    private final Account account;
+	private final String username;
+	private final String password;
 
-    public Client(Integer id, String lastname, String firstname, String address, String phone, String courrielElectronique, Account account) {
+    public User(Integer id, String lastname, String firstname, String address, String phone, String courrielElectronique, String password, String username) {
         this.id = id;
         this.lastname = lastname;
         this.firstname = firstname;
         this.address = address;
         this.phone = phone;
         this.courrielElectronique = courrielElectronique;
-        this.account = account;
+        this.password = password;
+        this.username = username;
     }
 
     public Integer getId() {
@@ -53,16 +55,15 @@ public class Client{
     }
 
 
-    public Account getAccount() {
-        return account;
-    }
+    public String getUsername() {
+		return username;
+	}
 
-    @Override
-    public String toString() {
-        return "Client{" + "id=" + id + ", lastname=" + lastname + ", firstname=" + firstname + ", address=" + address + ", phone=" + phone + ", courrielElectronique=" + courrielElectronique + ", account=" + account + '}';
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    @Override
+	@Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -73,7 +74,7 @@ public class Client{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Client other = (Client) obj;
+        final User other = (User) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
