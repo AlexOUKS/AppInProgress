@@ -9,6 +9,6 @@ package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.services;
  *
  * @author nvince01
  */
-public class CourseCreate {
+public class UserService {
     
 }

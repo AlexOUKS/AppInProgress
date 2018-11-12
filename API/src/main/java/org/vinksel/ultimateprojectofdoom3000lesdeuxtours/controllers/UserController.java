@@ -1,12 +1,12 @@
-package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.controller;
+package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.controllers;
 
 import java.util.ArrayList;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entity.Course;
-import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entity.User;
+import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Course;
+import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.User;
 
 @RestController
 public class UserController {
@@ -20,10 +20,8 @@ public class UserController {
 		return null;
 	}
 	
-	@RequestMapping("/profile")
-	public User see_profil(@RequestParam(value="id", defaultValue="null") String id){
-		if(id == null) //return the profil of the connected user
-			return user();
+	@RequestMapping("/profile/{id}")
+	public User see_profile(@PathVariable String id){ //To see other user profile
 		return null;
 	}
 }

@@ -3,33 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entity;
+package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities;
 
-import java.util.Objects; 
-public class Course{
-	
-	private final String title;
+import java.util.Objects;
+
+public class Location {
+
 	private final Integer id;
-	private final String code;
+    private final String city;
 
-    public Course(Integer id, String code, String title) {
+    public Location(Integer id, String city) {
         this.id = id;
-        this.code = code;
-        this.title = title;
+        this.city = city;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public String getCode() {
-        return code;
+    public String getCity() {
+        return city;
     }
-    
-    public String getTitle() {
-        return title;
-    }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -41,14 +36,11 @@ public class Course{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Course other = (Course) obj;
-        if (!Objects.equals(this.title, other.title)) {
+        final Location other = (Location) obj;
+        if (!Objects.equals(this.city, other.city)) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (!Objects.equals(this.code, other.code)) {
             return false;
         }
         return true;
@@ -56,10 +48,7 @@ public class Course{
 
     @Override
     public String toString() {
-        return "Course{" + "id=" + id + ", code=" + code + ", title=" + title + '}';
+        return "Location{" + "id=" + id + ", city=" + city + '}';
     }
-    
-    
-    
     
 }

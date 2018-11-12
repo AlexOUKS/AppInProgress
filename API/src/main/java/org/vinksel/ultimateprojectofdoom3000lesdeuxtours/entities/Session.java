@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entity;
+package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities;
 
 import java.util.Date;
 import java.util.Objects;

@@ -1,12 +1,12 @@
-package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.controller;
+package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.controllers;
 
 import java.util.ArrayList;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entity.Course;
-import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entity.Location;
+import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Course;
+import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Location;
 
 @RestController
 public class LocationController {
