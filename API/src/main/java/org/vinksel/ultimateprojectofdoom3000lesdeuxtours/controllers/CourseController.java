@@ -24,6 +24,14 @@ public class CourseController {
 		return false;
 	}
 	
+	@RequestMapping("/course/edit/") 
+	public boolean editCourse(@RequestParam(value="code", defaultValue="null") String code,
+			@RequestParam(value="title", defaultValue="null") String title,
+			@RequestParam(value="desc", defaultValue="null") String description)
+	{
+		return false;
+	}
+	
 	@RequestMapping("/courses/add") 
 	public boolean createCourse(@RequestParam(value="code", defaultValue="null") String code,
 			@RequestParam(value="title", defaultValue="null") String title,

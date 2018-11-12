@@ -14,7 +14,7 @@ public class Location {
 	@NotNull(message = "ID can not be null.")
 	private final Integer id;
 	@NotNull(message = "City name can not be null.")
-    private final String city;
+    private String city;
 
     public Location(Integer id, String city) {
         this.id = id;
@@ -29,7 +29,11 @@ public class Location {
         return city;
     }
 
-    @Override
+    public void setCity(String city) {
+		this.city = city;
+	}
+
+	@Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
