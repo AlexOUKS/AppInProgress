@@ -11,20 +11,32 @@ import javax.validation.constraints.NotNull;
 public class Course{
 
 	@NotNull(message = "Title can not be null.")
-	private final String title;
-	@NotNull(message = "ID can not be null.")
-	private final Integer id;
+	private String title;
+	@NotNull(message = "description can not be null.")
+	private String description;
 	@NotNull(message = "Code can not be null.")
-	private final String code;
+	private String code;
 
-    public Course(Integer id, String code, String title) {
-        this.id = id;
+    public Course(String code, String title, String description) {
+        this.description = description;
         this.code = code;
         this.title = title;
     }
 
-    public Integer getId() {
-        return id;
+    public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getDescription() {
+        return description;
     }
 
     public String getCode() {
@@ -50,7 +62,7 @@ public class Course{
         if (!Objects.equals(this.title, other.title)) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.description, other.description)) {
             return false;
         }
         if (!Objects.equals(this.code, other.code)) {
@@ -61,10 +73,6 @@ public class Course{
 
     @Override
     public String toString() {
-        return "Course{" + "id=" + id + ", code=" + code + ", title=" + title + '}';
+        return "Course{" + "description=" + description + ", code=" + code + ", title=" + title + '}';
     }
-    
-    
-    
-    
 }
