@@ -8,9 +8,25 @@
         name="java:hibernate/SessionFactory">
 
         <!-- properties -->
-        <property name="connection.datasource">java:/comp/env/jdbc/MyDB</property>
-        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+
+		<property name = "hibernate.connection.driver_class">
+         com.mysql.jdbc.Driver
+		</property>
+        <property name = "hibernate.dialect">
+			 org.hibernate.dialect.MySQLDialect
+		</property>
         <property name="show_sql">false</property>
+		<property name = "hibernate.connection.url">
+			 jdbc:mysql://borothfriplo54.mysql.db/borothfriplo54
+		</property>
+		  
+		<property name = "hibernate.connection.username">
+			 borothfriplo54
+		</property>
+		  
+		<property name = "hibernate.connection.password">
+			 Vinksel00
+		</property>
         <property name="transaction.factory_class">
             org.hibernate.transaction.JTATransactionFactory
         </property>
