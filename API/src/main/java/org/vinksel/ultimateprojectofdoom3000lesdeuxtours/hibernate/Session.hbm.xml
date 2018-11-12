@@ -2,11 +2,9 @@
 <!DOCTYPE hibernate-mapping PUBLIC
       "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
           "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<<<<<<< HEAD:API/src/main/java/org/vinksel/ultimateprojectofdoom3000lesdeuxtours/entities/Session.hbm.xml
-<hibernate-mapping package="org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Session">
-=======
+
 <hibernate-mapping package="org.vinksel.ultimateprojectofdoom3000lesdeuxtours.hibernate">
->>>>>>> 9777e1f618482d22b0390ad85078192d4fc323bb:API/src/main/java/org/vinksel/ultimateprojectofdoom3000lesdeuxtours/hibernate/Session.hbm.xml
+
 	<class name="Session" table="session">
 		<id name="id" column="id">
 		    <generator class="identity"/>
