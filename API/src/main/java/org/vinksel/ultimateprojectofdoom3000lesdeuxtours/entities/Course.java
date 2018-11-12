@@ -5,11 +5,16 @@
  */
 package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities;
 
-import java.util.Objects; 
+import java.util.Objects;
+
+import javax.validation.constraints.NotNull; 
 public class Course{
-	
+
+	@NotNull(message = "Title can not be null.")
 	private final String title;
+	@NotNull(message = "ID can not be null.")
 	private final Integer id;
+	@NotNull(message = "Code can not be null.")
 	private final String code;
 
     public Course(Integer id, String code, String title) {

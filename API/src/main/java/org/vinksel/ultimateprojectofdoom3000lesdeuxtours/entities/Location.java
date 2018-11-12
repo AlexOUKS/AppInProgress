@@ -7,9 +7,13 @@ package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities;
 
 import java.util.Objects;
 
+import javax.validation.constraints.NotNull;
+
 public class Location {
 
+	@NotNull(message = "ID can not be null.")
 	private final Integer id;
+	@NotNull(message = "City name can not be null.")
     private final String city;
 
     public Location(Integer id, String city) {

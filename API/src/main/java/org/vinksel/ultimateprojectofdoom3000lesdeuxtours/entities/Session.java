@@ -7,12 +7,18 @@ package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities;
 
 import java.util.Date;
 import java.util.Objects;
+
+import javax.validation.constraints.NotNull;
     
 public class Session {
-	
+
+	@NotNull(message = "ID can not be null.")
 	private final Integer id;
+	@NotNull(message = "Start date can not be null.")
     private final Date start_date;
+	@NotNull(message = "End date can not be null.")
     private final Date end_date;
+	@NotNull(message = "Max number of students can not be null.")
     private final Integer max_students;
 
     public Session(Integer id, Date start_date, Date end_date, Integer max_students) {
