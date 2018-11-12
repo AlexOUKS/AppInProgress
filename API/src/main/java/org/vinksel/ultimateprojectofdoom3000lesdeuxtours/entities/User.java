@@ -13,21 +13,49 @@ public class User{
 	@NotNull(message = "ID can not be null.")
 	private final Integer id;
 	@NotNull(message = "Last name can not be null.")
-	private final String lastname;
+	private String lastname;
 	@NotNull(message = "First name can not be null.")
-	private final String firstname;
+	private String firstname;
 	@NotNull(message = "Address can not be null.")
-    private final String address;
+    private String address;
 	@NotNull(message = "Phone number can not be null.")
-    private final String phone;
+    private String phone;
 	@NotNull(message = "Email can not be null.")
-    private final String courrielElectronique;
+    private String courrielElectronique;
 	@NotNull(message = "Username can not be null.")
-	private final String username;
+	private String username;
 	@NotNull(message = "Password can not be null.")
-	private final String password;
+	private String password;
 
-    public User(Integer id, String lastname, String firstname, String address, String phone, String courrielElectronique, String password, String username) {
+    public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public void setCourrielElectronique(String courrielElectronique) {
+		this.courrielElectronique = courrielElectronique;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public User(Integer id, String lastname, String firstname, String address, String phone, String courrielElectronique, String password, String username) {
         this.id = id;
         this.lastname = lastname;
         this.firstname = firstname;

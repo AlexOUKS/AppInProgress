@@ -15,13 +15,25 @@ public class Session {
 	@NotNull(message = "ID can not be null.")
 	private final Integer id;
 	@NotNull(message = "Start date can not be null.")
-    private final Date start_date;
+    private Date start_date;
 	@NotNull(message = "End date can not be null.")
-    private final Date end_date;
+    private Date end_date;
 	@NotNull(message = "Max number of students can not be null.")
-    private final Integer max_students;
+    private Integer max_students;
 
-    public Session(Integer id, Date start_date, Date end_date, Integer max_students) {
+    public void setStart_date(Date start_date) {
+		this.start_date = start_date;
+	}
+
+	public void setEnd_date(Date end_date) {
+		this.end_date = end_date;
+	}
+
+	public void setMax_students(Integer max_students) {
+		this.max_students = max_students;
+	}
+
+	public Session(Integer id, Date start_date, Date end_date, Integer max_students) {
         this.id = id;
         this.start_date = start_date;
         this.end_date = end_date;
