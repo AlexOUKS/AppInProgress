@@ -10,7 +10,7 @@ import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Location;
 
 @RestController
 public class LocationController {
-	@RequestMapping("/courses") 
+	@RequestMapping("/locations") 
 	public ArrayList<Location> locations(@RequestParam(value="id", defaultValue="all") String id, 
 									 @RequestParam(value="city", defaultValue="all") String city)
 	{

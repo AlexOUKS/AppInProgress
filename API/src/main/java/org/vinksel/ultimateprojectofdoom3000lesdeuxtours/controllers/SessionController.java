@@ -16,7 +16,7 @@ import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Course;
 @RestController
 
 public class SessionController {
-	@RequestMapping("/courses")
+	@RequestMapping("/sessions")
 	public ArrayList<Course> courses(@RequestBody String body){		
 		SessionFactory sf = new Configuration().configure().buildSessionFactory();
 		Session session = sf.openSession();
