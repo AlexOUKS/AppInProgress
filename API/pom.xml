@@ -28,6 +28,12 @@
             <version>3.23.1-GA</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+    		<groupId>mysql</groupId>
+  		  	<artifactId>mysql-connector-java</artifactId>
+    		<version>6.0.6</version>
+		</dependency>
 
         <dependency>
         	<groupId>org.springframework.boot</groupId>
