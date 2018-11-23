@@ -1,0 +1,9 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+	<hibernate-mapping package="org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities">
+		<class name="Location" table="location">
+			<id name="id" column="id"></id>
+			<property name="city" column="city" not-null="true" />
+		</class>
+	</hibernate-mapping>
