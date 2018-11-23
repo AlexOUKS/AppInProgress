@@ -30,11 +30,19 @@ public class CourseRepository {
 		
 		List<Course> ok;
 		try {
+<<<<<<< HEAD
                         SQLQuery query = session.createSQLQuery("SELECT * FROM course");
                         
                         query.addEntity(Course.class);
 			ok = query.getResultList();
                         
+=======
+			Query query = session.createQuery("from Course");
+			Iterator courses = query.iterate();
+			while (courses.hasNext()) {
+				response.add((Course) courses.next());
+			}
+>>>>>>> 5516275f32684b37c5c78da9a2d18e1fd307c99b
 		} finally {
 			session.close();
 		}
