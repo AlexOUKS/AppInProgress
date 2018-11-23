@@ -8,14 +8,20 @@ package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities;
 import java.util.Objects;
 
 import javax.validation.constraints.NotNull; 
-public class Course{
+
+
+public class Course {
+	@NotNull(message = "Code can not be null.")
+	private String code;
 
 	@NotNull(message = "Title can not be null.")
 	private String title;
 	@NotNull(message = "description can not be null.")
 	private String description;
-	@NotNull(message = "Code can not be null.")
-	private String code;
+	
+	public Course() {
+		
+	}
 
     public Course(String code, String title, String description) {
         this.description = description;

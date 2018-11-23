@@ -2,7 +2,9 @@ package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -22,20 +24,21 @@ public class CourseRepository {
 		return instance;
 	}
 	
-	public ArrayList<Course> getAllCourses(){
-		Session session = SessionFactoryUtil.getSessionFactory().openSession();
-		ArrayList<Course> response = new ArrayList<Course>();
+	public List<Course> getAllCourses(){
 		
+		Session session = SessionFactoryUtil.getSessionFactory().openSession();
+		
+		List<Course> ok;
 		try {
-			Query query = session.createQuery("select code from Course");
-			Iterator courses = query.iterate();
-			while (courses.hasNext()) {
-				response.add((Course) courses.next());
-			}
+                        SQLQuery query = session.createSQLQuery("SELECT * FROM course");
+                        
+                        query.addEntity(Course.class);
+			ok = query.getResultList();
+                        
 		} finally {
 			session.close();
 		}
-		return response;
+		return ok;
 	}
 
 }

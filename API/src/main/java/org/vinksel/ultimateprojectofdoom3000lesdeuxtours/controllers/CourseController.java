@@ -1,6 +1,7 @@
 package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.controllers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,10 +14,16 @@ import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.CourseRepo
 @RestController
 public class CourseController {
 	@RequestMapping("/courses") 
-	public ArrayList<Course> courses(@RequestParam(value="code", defaultValue="all") String code, 
+	public String courses(@RequestParam(value="code", defaultValue="all") String code, 
 									 @RequestParam(value="name", defaultValue="all") String name)
 	{
-		return CourseRepository.getInstance().getAllCourses();
+		List<Course> list = CourseRepository.getInstance().getAllCourses();
+                if (list.isEmpty()) {
+                    return "empty";
+                } else {
+                    return (String) list.get(0).toString();
+                    
+                }
 	}
 	
 	@RequestMapping("/course/delete/{id}") 

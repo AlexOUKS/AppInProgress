@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23 nov. 2018 18:04:54 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.User" table="USER">
+        <id name="id" type="java.lang.Long">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="lastname" type="java.lang.String">
+            <column name="LASTNAME" />
+        </property>
+        <property name="firstname" type="java.lang.String">
+            <column name="FIRSTNAME" />
+        </property>
+        <property name="address" type="java.lang.String">
+            <column name="ADDRESS" />
+        </property>
+        <property name="phone" type="java.lang.String">
+            <column name="PHONE" />
+        </property>
+        <property name="courrielElectronique" type="java.lang.String">
+            <column name="COURRIELELECTRONIQUE" />
+        </property>
+        <property name="username" type="java.lang.String">
+            <column name="USERNAME" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="PASSWORD" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -13,6 +13,10 @@ public class SessionFactoryUtil {
         try {
         	Configuration configuration = new Configuration();
         	configuration.configure("hibernate.cfg.xml");
+        	configuration.addResource("Course.hbm.xml");
+        	configuration.addResource("Session.hbm.xml");
+        	configuration.addResource("Location.hbm.xml");
+        	configuration.addResource("User.hbm.xml");
         	ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
         	
         	SessionFactory sessionFactory = configuration
