@@ -4,3 +4,4 @@
 /app/.vscode/
 /API/.vscode/
 /API/target/
+API/src/main/resources/hibernate.cfg.xml

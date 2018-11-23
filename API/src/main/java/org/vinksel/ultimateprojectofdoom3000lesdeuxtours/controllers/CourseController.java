@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Course;
+import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.CourseRepository;
 
 @RestController
 public class CourseController {
@@ -15,7 +16,7 @@ public class CourseController {
 	public ArrayList<Course> courses(@RequestParam(value="code", defaultValue="all") String code, 
 									 @RequestParam(value="name", defaultValue="all") String name)
 	{
-		return null;
+		return CourseRepository.getInstance().getAllCourses();
 	}
 	
 	@RequestMapping("/course/delete/{id}") 
