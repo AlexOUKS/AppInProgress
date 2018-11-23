@@ -27,7 +27,7 @@ public class CourseRepository {
 		ArrayList<Course> response = new ArrayList<Course>();
 		
 		try {
-			Query query = session.createQuery("select * from Course");
+			Query query = session.createQuery("select id from Course");
 			Iterator courses = query.iterate();
 			while (courses.hasNext()) {
 				response.add((Course) courses.next());
