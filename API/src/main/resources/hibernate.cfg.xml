@@ -4,14 +4,10 @@
     "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <!-- a SessionFactory instance listed as /jndi/name -->
-    <session-factory
-        name="java:hibernate/SessionFactory">
+    <session-factory name="java:hibernate/SessionFactory">
 
         <!-- properties -->
 
-		<property name = "hibernate.connection.driver_class">
-         com.mysql.jdbc.Driver
-		</property>
         <property name = "hibernate.dialect">
 			 org.hibernate.dialect.MySQLDialect
 		</property>
@@ -37,10 +33,10 @@
         <property name="jta.UserTransaction">java:comp/UserTransaction</property>
 
         <!-- mapping files -->
-    	<mapping resource="org/vinksel/ultimateprojectofdoom3000lesdeuxtours/entities/Course.hbm.xml"/>
-    	<mapping resource="org/vinksel/ultimateprojectofdoom3000lesdeuxtours/entities/Location.hbm.xml"/>
-    	<mapping resource="org/vinksel/ultimateprojectofdoom3000lesdeuxtours/entities/Session.hbm.xml"/>
-    	<mapping resource="org/vinksel/ultimateprojectofdoom3000lesdeuxtours/entities/User.hbm.xml"/>
+    	<mapping  class="org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Course" resource="org/vinksel/ultimateprojectofdoom3000lesdeuxtours/entities/Course.hbm.xml"/>
+    	<mapping  class="org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Location" resource="org/vinksel/ultimateprojectofdoom3000lesdeuxtours/entities/Location.hbm.xml"/>
+    	<mapping  class="org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Session" resource="org/vinksel/ultimateprojectofdoom3000lesdeuxtours/entities/Session.hbm.xml"/>
+    	<mapping  class="org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.User" resource="org/vinksel/ultimateprojectofdoom3000lesdeuxtours/entities/User.hbm.xml"/>
         
 
         <!-- cache settings -->
