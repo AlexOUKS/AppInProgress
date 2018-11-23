@@ -21,7 +21,7 @@
 		
         <property name="show_sql">false</property>
 		<property name = "hibernate.connection.url">
-			 jdbc:mysql://localhost/borothfriplo54
+			 jdbc:mysql://localhost/borothfriplo54?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC
 		</property>
 		  
 		<property name = "hibernate.connection.username">
