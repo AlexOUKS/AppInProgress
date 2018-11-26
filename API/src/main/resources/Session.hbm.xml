@@ -17,5 +17,11 @@
         <property name="max_students" type="java.lang.Integer">
             <column name="MAX_STUDENTS" />
         </property>
+        
+        <set name="users" table="user_session" cascade="save-update">
+            <key column="session_id"/>
+            <many-to-many column="user_id" class="User" />
+        </set>
+    	<many-to-one name="location" column="location_id" not-null="true"/>
     </class>
 </hibernate-mapping>

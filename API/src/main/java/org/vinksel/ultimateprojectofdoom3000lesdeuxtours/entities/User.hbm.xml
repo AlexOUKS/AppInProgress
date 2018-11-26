@@ -29,5 +29,10 @@
         <property name="password" type="java.lang.String">
             <column name="PASSWORD" />
         </property>
+        
+        <set name="session" table="user_session" cascade="save-update">
+            <key column="user_id"/>
+            <many-to-many column="session_id" class="Session" />
+        </set>
     </class>
 </hibernate-mapping>

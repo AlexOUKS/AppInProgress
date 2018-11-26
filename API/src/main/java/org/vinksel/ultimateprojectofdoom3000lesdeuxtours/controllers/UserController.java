@@ -22,11 +22,20 @@ import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.CourseRepo
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.UserRepository;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.validators.Validators;
 
+import com.google.gson.Gson;
+
 @RestController
 public class UserController {
 	@RequestMapping("/mycourses")
-	public ArrayList<Course> courses(){ //List of the user's courses
-		return null;
+	public String courses(){ //List of the user's courses
+		Long idUser = (long) 10;
+		List<Course> courses = CourseRepository.forUser(idUser);
+        if (Validators.isArrayEmpty(courses)) {
+            return "Liste vide";
+        } else {
+            return new Gson().toJson(courses);
+            
+        }
 	}
 	
 	@PostMapping("/login")
@@ -53,7 +62,7 @@ public class UserController {
 				String token = bytes.toString();
 				
 				user.setGrainsel(token);
-				UserRepository.getInstance().update(user);
+				UserRepository.update(user);
 			
 	
 				return new ResponseEntity<Object>(token, HttpStatus.OK); 

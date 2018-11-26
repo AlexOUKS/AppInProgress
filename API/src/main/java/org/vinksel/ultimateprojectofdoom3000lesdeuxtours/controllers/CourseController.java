@@ -2,6 +2,8 @@ package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.controllers;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,47 +18,38 @@ import com.google.gson.Gson;
 @RestController
 public class CourseController {
 	@RequestMapping("/courses") 
-	public String courses(@RequestParam(value="code", defaultValue="all") String code, 
-									 @RequestParam(value="name", defaultValue="all") String name)
+	public ResponseEntity<?> courses()
 	{
-		List<Course> courses = CourseRepository.getInstance().getAllCourses();
+		List<Course> courses = CourseRepository.getAll();
             if (Validators.isArrayEmpty(courses)) {
-                return "Liste vide";
+                return new ResponseEntity<String>("Liste vide", HttpStatus.OK);
             } else {
-                return new Gson().toJson(courses);
+                return new ResponseEntity<List>(courses, HttpStatus.OK);
                 
             }
 	}
 	
 	@RequestMapping("/course/delete/{id}") 
-	public boolean deleteCourse(@PathVariable String id)
+	public ResponseEntity<?> deleteCourse(@PathVariable String id)
 	{
-		return false;
+		CourseRepository.remove(id);
+        return new ResponseEntity<String>("Elément supprimé", HttpStatus.OK);
 	}
 	
 	@RequestMapping("/course/edit/") 
-	public boolean editCourse(@RequestParam(value="code", defaultValue="null") String code,
+	public ResponseEntity<?> editCourse(@RequestParam(value="code", defaultValue="null") String code,
 			@RequestParam(value="title", defaultValue="null") String title,
 			@RequestParam(value="desc", defaultValue="null") String description)
 	{
-		return false;
+        return new ResponseEntity<String>("Elément modifié", HttpStatus.OK);
 	}
 	
 	@RequestMapping("/courses/add") 
-	public boolean createCourse(@RequestParam(value="code", defaultValue="null") String code,
+	public ResponseEntity<?> createCourse(@RequestParam(value="code", defaultValue="null") String code,
 			@RequestParam(value="title", defaultValue="null") String title,
 			@RequestParam(value="desc", defaultValue="null") String description
 		)	
 	{
-		if(title == null)
-			return false;
-			
-		if(description == null)
-			return false;
-			
-		if(code == null)
-			return false;
-		
-		return true;
+        return new ResponseEntity<String>("Elément créé", HttpStatus.OK);
 	}
 }

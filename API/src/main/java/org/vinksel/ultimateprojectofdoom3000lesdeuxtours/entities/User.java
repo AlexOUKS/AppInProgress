@@ -7,7 +7,11 @@ package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities;
 
 import java.util.Objects;
 
-import javax.validation.constraints.NotNull; 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Entity;
+import org.hibernate.annotations.Table; 
+
 
 public class User{
 	@NotNull(message = "ID can not be null.")

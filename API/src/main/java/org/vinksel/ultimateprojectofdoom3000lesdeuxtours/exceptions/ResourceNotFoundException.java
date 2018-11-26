@@ -1,9 +1,9 @@
 package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException{
-	private Long resourceId;
+	private String resourceId;
 	 
-    public ResourceNotFoundException(Long resourceId, String message) {
+    public ResourceNotFoundException(String resourceId, String message) {
         super(message);
         this.resourceId = resourceId;
     }
