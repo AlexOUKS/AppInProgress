@@ -1,6 +1,5 @@
 package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.validation.BindingResult;
@@ -10,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Course;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.CourseRepository;
+import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.validators.Validators;
+
+import com.google.gson.Gson;
 
 @RestController
 public class CourseController {
@@ -17,13 +19,13 @@ public class CourseController {
 	public String courses(@RequestParam(value="code", defaultValue="all") String code, 
 									 @RequestParam(value="name", defaultValue="all") String name)
 	{
-		List<Course> list = CourseRepository.getInstance().getAllCourses();
-                if (list.isEmpty()) {
-                    return "empty";
-                } else {
-                    return (String) list.get(0).toString();
-                    
-                }
+		List<Course> courses = CourseRepository.getInstance().getAllCourses();
+            if (Validators.isArrayEmpty(courses)) {
+                return "Liste vide";
+            } else {
+                return new Gson().toJson(courses);
+                
+            }
 	}
 	
 	@RequestMapping("/course/delete/{id}") 

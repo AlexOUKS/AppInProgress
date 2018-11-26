@@ -12,13 +12,17 @@ import javax.validation.constraints.NotNull;
 public class Location {
 
 	@NotNull(message = "ID can not be null.")
-	private final Integer id;
+	private Integer id;
 	@NotNull(message = "City name can not be null.")
     private String city;
 
     public Location(Integer id, String city) {
         this.id = id;
         this.city = city;
+    }
+    
+    public void setId(Integer id) {
+		this.id = id;
     }
 
     public Integer getId() {

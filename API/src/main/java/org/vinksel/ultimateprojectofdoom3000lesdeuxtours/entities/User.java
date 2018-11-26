@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 
 public class User{
 	@NotNull(message = "ID can not be null.")
-	private final Integer id;
+	private Integer userId;
 	@NotNull(message = "Last name can not be null.")
 	private String lastname;
 	@NotNull(message = "First name can not be null.")
@@ -26,7 +26,25 @@ public class User{
 	private String username;
 	@NotNull(message = "Password can not be null.")
 	private String password;
+	
+	private String grainsel;
+	
+	public User() {
+		
+	}
 
+	public String getGrainsel() {
+		return grainsel;
+	}
+
+	public void setGrainsel(String grainsel) {
+		this.grainsel = grainsel;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+    }
+	
     public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
@@ -55,8 +73,8 @@ public class User{
 		this.password = password;
 	}
 
-	public User(Integer id, String lastname, String firstname, String address, String phone, String courrielElectronique, String password, String username) {
-        this.id = id;
+	public User(Integer userId, String lastname, String firstname, String address, String phone, String courrielElectronique, String password, String username) {
+        this.userId = userId;
         this.lastname = lastname;
         this.firstname = firstname;
         this.address = address;
@@ -66,8 +84,8 @@ public class User{
         this.username = username;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getUserId() {
+        return userId;
     }
 
     public String getLastname() {
@@ -113,7 +131,7 @@ public class User{
             return false;
         }
         final User other = (User) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.userId, other.userId)) {
             return false;
         }
         return true;

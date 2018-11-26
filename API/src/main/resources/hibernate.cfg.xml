@@ -2,18 +2,7 @@
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
                                          "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-<<<<<<< HEAD
- <session-factory name="">
-  <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-  <property name="hibernate.connection.password">lo54</property>
-  <property name="hibernate.connection.url">jdbc:mysql://localhost/borothfriplo54?useLegacyDatetimeCode=false&amp;serverTimezone=UTC</property>
-  <property name="hibernate.connection.username">lo54</property>
-  <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
-  <mapping resource="Course.hbm.xml"/>
-  <mapping resource="Location.hbm.xml"/>
- </session-factory>
-</hibernate-configuration>
-=======
+
     <!-- a SessionFactory instance listed as /jndi/name -->
     <session-factory name="java:hibernate/SessionFactory">
 
@@ -38,10 +27,7 @@
 		<property name = "hibernate.connection.password">
 			 lo54
 		</property>
-        <property name="transaction.factory_class">
-            org.hibernate.transaction.JTATransactionFactory
-        </property>
-        <property name="jta.UserTransaction">java:comp/UserTransaction</property>
+        
 
         <!-- mapping files -->
     	<mapping  class="org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Course" resource="org/vinksel/ultimateprojectofdoom3000lesdeuxtours/entities/Course.hbm.xml"/>
@@ -59,4 +45,4 @@
     </session-factory>
 
 </hibernate-configuration>
->>>>>>> 5516275f32684b37c5c78da9a2d18e1fd307c99b
+

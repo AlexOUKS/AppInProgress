@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 public class Session {
 
 	@NotNull(message = "ID can not be null.")
-	private final Integer id;
+	private Integer id;
 	@NotNull(message = "Start date can not be null.")
     private Date start_date;
 	@NotNull(message = "End date can not be null.")
@@ -21,7 +21,20 @@ public class Session {
 	@NotNull(message = "Max number of students can not be null.")
     private Integer max_students;
 
-    public void setStart_date(Date start_date) {
+ 
+
+	public Session(Integer id, Date start_date, Date end_date, Integer max_students) {
+        this.id = id;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.max_students = max_students;
+    }
+	
+	public void setId(Integer id) {
+		this.id = id;
+    }
+	
+   public void setStart_date(Date start_date) {
 		this.start_date = start_date;
 	}
 
@@ -32,13 +45,6 @@ public class Session {
 	public void setMax_students(Integer max_students) {
 		this.max_students = max_students;
 	}
-
-	public Session(Integer id, Date start_date, Date end_date, Integer max_students) {
-        this.id = id;
-        this.start_date = start_date;
-        this.end_date = end_date;
-        this.max_students = max_students;
-    }
 
     public Integer getId() {
         return id;
