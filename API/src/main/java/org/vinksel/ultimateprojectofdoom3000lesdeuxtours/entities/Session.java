@@ -14,6 +14,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @DynamicUpdate
 public class Session {
@@ -35,19 +37,23 @@ public class Session {
 	@NotNull(message = "Max number of students can not be null.")
     private Integer max_students;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="course_id")
+	@JsonIgnore
 	@NotNull(message = "A session have to be related to an existing course.")
 	private Course course;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="location_id")
 	@NotNull(message = "A session need a location.")
 	private Location location;
 
-	@ManyToMany(mappedBy = "sessions")
+	@ManyToMany(mappedBy = "sessions", fetch = FetchType.EAGER)
+	@JsonIgnore
 	private Set<User> users = new HashSet<User>();
 
+	public Session(){};
+	
 	public Session(Integer id, Date start_date, Date end_date, Integer max_students, Course course, Location location) {
         this.id = id;
         this.start_date = start_date;
@@ -120,13 +126,10 @@ public class Session {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((course == null) ? 0 : course.hashCode());
 		result = prime * result + ((end_date == null) ? 0 : end_date.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((location == null) ? 0 : location.hashCode());
 		result = prime * result + ((max_students == null) ? 0 : max_students.hashCode());
 		result = prime * result + ((start_date == null) ? 0 : start_date.hashCode());
-		result = prime * result + ((users == null) ? 0 : users.hashCode());
 		return result;
 	}
 

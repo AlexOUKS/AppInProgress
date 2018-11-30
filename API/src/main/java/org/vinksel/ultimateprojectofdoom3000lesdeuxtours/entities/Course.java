@@ -32,8 +32,7 @@ public class Course {
 	private String description;
 	
 	//Toute modification de l'attr. course d'une Session modifiera la liste des sessions du-dit objet course
-	@OneToMany(mappedBy="course")
-	@JsonIgnore
+	@OneToMany(mappedBy="course", fetch = FetchType.EAGER)
 	private Set<Session> sessions = new HashSet<Session>();
 
 	public Course(){};
@@ -68,7 +67,7 @@ public class Course {
 	}
 	
 	public void removeSession(Session session){
-		SessionRepository.remove(session.getId());
+		SessionRepository.getInstance().remove(session.getId());
 		this.sessions.remove(session);
 	}
 
@@ -102,7 +101,6 @@ public class Course {
 		int result = 1;
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((sessions == null) ? 0 : sessions.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -141,7 +139,7 @@ public class Course {
 
     @Override
 	public String toString() {
-		return "Course [code=" + code + ", title=" + title + ", description=" + description + 
+		return "Course [code=" + code + ", title=" + title + ", description=" + description +
 				"]";
 	}
 }

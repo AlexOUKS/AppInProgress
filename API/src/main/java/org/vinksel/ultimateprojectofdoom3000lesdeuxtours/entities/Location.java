@@ -14,6 +14,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @DynamicUpdate
 public class Location {
@@ -29,7 +31,10 @@ public class Location {
     private String city;
 
 	@OneToMany(mappedBy="location")
+	@JsonIgnore
 	private Set<Session> sessions = new HashSet<Session>();
+	
+	public Location(){};
 	
     public Location(Integer id, String city) {
         this.id = id;
@@ -66,7 +71,6 @@ public class Location {
 		int result = 1;
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((sessions == null) ? 0 : sessions.hashCode());
 		return result;
 	}
 

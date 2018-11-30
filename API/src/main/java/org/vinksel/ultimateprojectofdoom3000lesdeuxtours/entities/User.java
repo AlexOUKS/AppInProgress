@@ -62,14 +62,12 @@ public class User{
 	@NotNull(message = "Saltkey can not be null.")
 	private String grainsel;
 	
-	@ManyToMany()
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="USER_SESSION", joinColumns= @JoinColumn(name="user_id"),
 				inverseJoinColumns = @JoinColumn(name ="session_id"))
 	private Set<Session> sessions =  new HashSet<Session>();
 
-	public User() {
-		
-	}
+	public User() {}
 
 	public String getGrainsel() {
 		return grainsel;
@@ -178,7 +176,6 @@ public class User{
 		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
-		result = prime * result + ((sessions == null) ? 0 : sessions.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;

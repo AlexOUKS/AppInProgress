@@ -8,29 +8,16 @@ import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.User;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.hibernate.SessionFactoryUtil;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.validators.Validators;
 
-public class UserRepository {
-	static private UserRepository instance;
-	
-	private UserRepository(){
-	};
-	
-	static public UserRepository getInstance(){
+public class UserRepository extends UtilRepository {
+	private static Class className = User.class;
+	private static UserRepository instance;
+
+	public static UserRepository getInstance() {
 		if(instance == null)
 			instance = new UserRepository();
 		return instance;
 	}
 	
-	static public void save(User user) {
-		Session session = SessionFactoryUtil.getSessionFactory().openSession();
-		session.save(user);
-		session.close();
-	}
-	
-	static public void update(User user) {
-		Session session = SessionFactoryUtil.getSessionFactory().openSession();
-		session.update(user);
-		session.close();
-	}
 	public User getUser(String login) {
 		Session session = SessionFactoryUtil.getSessionFactory().openSession();
 		List<User> user;
@@ -47,5 +34,11 @@ public class UserRepository {
 		} else {
 			return user.get(0);
 		}
+	}
+
+	@Override
+	protected Class getClassName()
+	{
+		return className;
 	}
 }

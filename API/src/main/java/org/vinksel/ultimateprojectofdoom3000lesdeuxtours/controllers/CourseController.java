@@ -1,5 +1,7 @@
 package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.controllers;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -17,19 +19,25 @@ public class CourseController {
 	@RequestMapping("/courses") 
 	public ResponseEntity<?> courses()
 	{
-		List<Course> courses = CourseRepository.getAll();
-            if (Validators.isArrayEmpty(courses)) {
-                return new ResponseEntity<String>("Liste vide", HttpStatus.OK);
-            } else {
-                return new ResponseEntity<List<Course>>(courses, HttpStatus.OK);
-                
-            }
+		List<Object> courses = new ArrayList<Object>();
+		try {
+			System.out.println(CourseRepository.className);
+			courses = CourseRepository.getInstance().getAll();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        if (Validators.isArrayEmpty(courses)) {
+            return new ResponseEntity<String>("Liste vide", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<List<Object>>(courses, HttpStatus.OK);
+            
+        }
 	}
 	
 	@RequestMapping("/course/delete/{id}") 
 	public ResponseEntity<?> deleteCourse(@PathVariable String id)
 	{
-		CourseRepository.remove(id);
+		CourseRepository.getInstance().remove(id);
         return new ResponseEntity<String>("Elément supprimé", HttpStatus.OK);
 	}
 	

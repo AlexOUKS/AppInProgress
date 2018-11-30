@@ -24,15 +24,8 @@ import com.google.gson.Gson;
 @RestController
 public class UserController {
 	@RequestMapping("/mycourses")
-	public String courses(){ //List of the user's courses
-		Long idUser = (long) 10;
-		List<Course> courses = CourseRepository.forUser(idUser);
-        if (Validators.isArrayEmpty(courses)) {
-            return "Liste vide";
-        } else {
-            return new Gson().toJson(courses);
-            
-        }
+	public String courses(){
+		return null; 
 	}
 	
 	@PostMapping("/login")
@@ -59,7 +52,7 @@ public class UserController {
 				String token = bytes.toString();
 				
 				user.setGrainsel(token);
-				UserRepository.update(user);
+				UserRepository.getInstance().update(user);
 			
 	
 				return new ResponseEntity<Object>(token, HttpStatus.OK); 
