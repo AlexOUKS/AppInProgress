@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.DigestUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,7 @@ public class UserController {
 		return null; 
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("/login")
 	public ResponseEntity<Object> courses(@RequestParam(value="login", required = true) String login,
 										@RequestParam(value="password", required = true) String password) throws UnsupportedEncodingException, NoSuchAlgorithmException{	
@@ -49,9 +51,9 @@ public class UserController {
 				SecureRandom random = new SecureRandom();
 				byte bytes[] = new byte[50];
 				random.nextBytes(bytes);
-				String token = bytes.toString();
+				String token = DigestUtils.md5DigestAsHex(bytes);
 				
-				user.setGrainsel(token);
+				user.setToken(token);
 				UserRepository.getInstance().update(user);
 			
 	
