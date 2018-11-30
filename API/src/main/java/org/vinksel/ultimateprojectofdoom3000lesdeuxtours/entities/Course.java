@@ -13,6 +13,8 @@ import javax.persistence.*;
 import org.hibernate.annotations.DynamicUpdate;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.SessionRepository;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @DynamicUpdate
 @Table(name="course")
@@ -31,6 +33,7 @@ public class Course {
 	
 	//Toute modification de l'attr. course d'une Session modifiera la liste des sessions du-dit objet course
 	@OneToMany(mappedBy="course")
+	@JsonIgnore
 	private Set<Session> sessions = new HashSet<Session>();
 
 	public Course(){};
