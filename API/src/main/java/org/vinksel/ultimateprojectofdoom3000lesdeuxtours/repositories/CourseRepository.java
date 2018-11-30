@@ -24,8 +24,10 @@ public class CourseRepository {
 		Session session = SessionFactoryUtil.getSessionFactory().openSession();
 		List<Course> listCourse = null;
 		try {
-			Query qry = session.createQuery("from Course");
+			
+			Query<Course> qry = session.createQuery("from Course");
 			listCourse =qry.list();
+			System.out.println("ok");
 		} catch(Exception e){
             e.printStackTrace();
 		}finally {

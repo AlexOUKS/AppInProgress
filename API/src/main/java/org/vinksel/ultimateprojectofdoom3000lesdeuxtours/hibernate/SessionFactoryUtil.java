@@ -13,6 +13,10 @@ public class SessionFactoryUtil {
         try {
         	Configuration configuration = new Configuration();
         	configuration.configure("hibernate.cfg.xml");
+        	configuration.addAnnotatedClass(org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Course.class);
+        	configuration.addAnnotatedClass(org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Location.class);
+        	configuration.addAnnotatedClass(org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.User.class);
+        	configuration.addAnnotatedClass(org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Session.class);
         	/*configuration.addResource("User.hbm.xml");
         	configuration.addResource("Location.hbm.xml");
         	configuration.addResource("Course.hbm.xml");

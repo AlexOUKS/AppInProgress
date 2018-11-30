@@ -13,7 +13,9 @@ import javax.persistence.*;
 import org.hibernate.annotations.DynamicUpdate;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.SessionRepository;
 
+@Entity
 @DynamicUpdate
+@Table(name="course")
 public class Course {
 	@Id
 	@NotNull(message = "Code can not be null.")
@@ -136,7 +138,7 @@ public class Course {
 
     @Override
 	public String toString() {
-		return "Course [code=" + code + ", title=" + title + ", description=" + description + ", sessions=" + sessions
-				+ "]";
+		return "Course [code=" + code + ", title=" + title + ", description=" + description + 
+				"]";
 	}
 }
