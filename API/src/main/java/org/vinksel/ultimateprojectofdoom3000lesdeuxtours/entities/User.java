@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.DynamicUpdate; 
 
+@Entity
 @DynamicUpdate
 public class User{
 	@Id
