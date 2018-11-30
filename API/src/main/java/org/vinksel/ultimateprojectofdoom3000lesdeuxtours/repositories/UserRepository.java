@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Course;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.User;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.hibernate.SessionFactoryUtil;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.validators.Validators;
@@ -28,8 +29,17 @@ public class UserRepository {
 	
 	static public void update(User user) {
 		Session session = SessionFactoryUtil.getSessionFactory().openSession();
-		session.update(user);
-		session.close();
+		try {
+			session.beginTransaction();
+			session.update(user);
+			session.getTransaction().commit();
+		}
+		catch(Exception e){
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+			session.close();
+		}
 	}
 	public User getUser(String login) {
 		Session session = SessionFactoryUtil.getSessionFactory().openSession();

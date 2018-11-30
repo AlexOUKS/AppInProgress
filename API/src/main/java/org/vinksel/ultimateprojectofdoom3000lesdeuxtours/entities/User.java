@@ -62,6 +62,10 @@ public class User{
 	@NotNull(message = "Saltkey can not be null.")
 	private String grainsel;
 	
+	@Column(nullable = false)
+	@NotNull(message = "Token can not be null.")
+	private String token;
+	
 	@ManyToMany()
 	@JoinTable(name="USER_SESSION", joinColumns= @JoinColumn(name="user_id"),
 				inverseJoinColumns = @JoinColumn(name ="session_id"))
@@ -120,7 +124,7 @@ public class User{
 		this.password = password;
 	}
 
-	public User(Integer userId, String lastname, String firstname, String address, String phone, String courrielElectronique, String password, String username) {
+	public User(Integer userId, String lastname, String firstname, String address, String phone, String courrielElectronique, String password, String username, String token) {
         this.userId = userId;
         this.lastname = lastname;
         this.firstname = firstname;
@@ -129,6 +133,7 @@ public class User{
         this.courrielElectronique = courrielElectronique;
         this.password = password;
         this.username = username;
+        this.token = token;
     }
 
     @SuppressWarnings("unused")
@@ -167,6 +172,15 @@ public class User{
 		return password;
 	}
 
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
