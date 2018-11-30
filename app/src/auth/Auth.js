@@ -30,13 +30,24 @@ class Auth extends Component {
     this.setState({mdp: event.target.value});
   }
 
+  toForm(details) {
+    var formBody = [];
+    for (var property in details) {
+      var encodedKey = encodeURIComponent(property);
+      var encodedValue = encodeURIComponent(details[property]);
+      formBody.push(encodedKey + "=" + encodedValue);
+    }
+    formBody = formBody.join("&");
+    return formBody;
+  }
   
   login(e) {
     if(e.key === 'Enter' || e.type === 'click'){
+      let form = this.toForm({'login' : this.state.login,
+      'password' : this.state.mdp, 
+    });
       axios.post(process.env.REACT_APP_API_URL+'/login', 
-        {'login' : this.state.login,
-          'password' : this.state.mdp, 
-        },
+        form,
         {
           headers : {
             'Content-Type': 'application/x-www-form-urlencoded'
