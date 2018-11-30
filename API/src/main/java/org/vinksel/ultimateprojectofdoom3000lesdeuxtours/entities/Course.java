@@ -31,7 +31,7 @@ public class Course {
 	
 	//Toute modification de l'attr. course d'une Session modifiera la liste des sessions du-dit objet course
 	@OneToMany(mappedBy="course")
-	private Set<Session> sessions;
+	private Set<Session> sessions = new HashSet<Session>();
 
 	public Course(){};
 	

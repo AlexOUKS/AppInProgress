@@ -5,6 +5,7 @@
  */
 package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -28,7 +29,7 @@ public class Location {
     private String city;
 
 	@OneToMany(mappedBy="location")
-	private Set<Session> sessions;
+	private Set<Session> sessions = new HashSet<Session>();
 	
     public Location(Integer id, String city) {
         this.id = id;
