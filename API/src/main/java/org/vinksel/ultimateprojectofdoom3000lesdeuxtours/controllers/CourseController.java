@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Course;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.CourseRepository;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.validators.Validators;
-
-import com.google.gson.Gson;
 
 @RestController
 public class CourseController {
@@ -24,7 +21,7 @@ public class CourseController {
             if (Validators.isArrayEmpty(courses)) {
                 return new ResponseEntity<String>("Liste vide", HttpStatus.OK);
             } else {
-                return new ResponseEntity<List>(courses, HttpStatus.OK);
+                return new ResponseEntity<List<Course>>(courses, HttpStatus.OK);
                 
             }
 	}

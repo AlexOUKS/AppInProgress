@@ -35,9 +35,9 @@ public class UserRepository {
 		Session session = SessionFactoryUtil.getSessionFactory().openSession();
 		List<User> user;
 		try {
-			Query qry = session.createQuery("from User u where u.username = ?");
-			qry.setString(0, login);
-			user =qry.list();
+			Query<User> qry = session.createQuery("from User u where u.username = ?");
+			qry.setParameter(0, login);
+			user = qry.list();
 		} finally {
 			session.close();
 		}

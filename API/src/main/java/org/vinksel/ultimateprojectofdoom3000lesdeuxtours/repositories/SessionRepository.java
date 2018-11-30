@@ -9,4 +9,7 @@ public class SessionRepository {
 	{
 		return null;
 	}
+	static public void remove(Integer integer){
+		
+	}
 }

@@ -14,5 +14,11 @@
         <property name="description" type="java.lang.String">
             <column name="DESCRIPTION" />
         </property>
+        
+    	<set name="sessions" table="SESSION" inverse="true">
+        	<key column="COURSE_ID"/>
+        	<one-to-many class="Session"/>
+   		</set>
+
     </class>
 </hibernate-mapping>

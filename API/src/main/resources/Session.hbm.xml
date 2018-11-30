@@ -5,7 +5,7 @@
 <hibernate-mapping>
     <class name="org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Session" table="SESSION">
         <id name="id" type="java.lang.Long">
-            <column name="ID" />
+            <column name="SESSION_ID" />
             <generator class="assigned" />
         </id>
         <property name="start_date" type="java.util.Date">
@@ -18,10 +18,11 @@
             <column name="MAX_STUDENTS" />
         </property>
         
-        <set name="users" table="user_session" cascade="save-update">
-            <key column="session_id"/>
-            <many-to-many column="user_id" class="User" />
+        <set name="users" table="USER_SESSION" cascade="save-update">
+            <key column="SESSION_ID"/>
+            <many-to-many column="USER_ID" class="User" />
         </set>
-    	<many-to-one name="location" column="location_id" not-null="true"/>
+        <many-to-one name="Course" column="COURSE_ID" not-null="true"/>
+    	<many-to-one name="Location" column="LOCATION_ID" not-null="true"/>
     </class>
 </hibernate-mapping>

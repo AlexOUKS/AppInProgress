@@ -5,31 +5,69 @@
  */
 package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities;
 
-import java.util.Objects;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.validation.constraints.NotNull; 
+import javax.validation.constraints.NotNull;
+import javax.persistence.*;
+import org.hibernate.annotations.DynamicUpdate;
+import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.SessionRepository;
 
-
+@DynamicUpdate
 public class Course {
+	@Id
 	@NotNull(message = "Code can not be null.")
 	private String code;
 
+	@Column(nullable=false) 
 	@NotNull(message = "Title can not be null.")
 	private String title;
+
+	@Column(nullable=false) 
 	@NotNull(message = "description can not be null.")
 	private String description;
 	
-	public Course() {
-		
-	}
+	//Toute modification de l'attr. course d'une Session modifiera la liste des sessions du-dit objet course
+	@OneToMany(mappedBy="course")
+	private Set<Session> sessions;
 
+	public Course(){};
+	
     public Course(String code, String title, String description) {
         this.description = description;
         this.code = code;
         this.title = title;
+        this.sessions = new HashSet<Session>();
     }
 
-    public void setTitle(String title) {
+    public Course(String code, String title, String description, Set<Session> sessions) {
+        this.description = description;
+        this.code = code;
+        this.title = title;
+        this.sessions = sessions;
+    }
+
+    public Set<Session> getSessions() {
+		return sessions;
+	}
+
+	@SuppressWarnings("unused")
+	private void setSessions(Set<Session> sessions) {
+		this.sessions = sessions;
+	}
+	
+	public void addSession(Session session)
+	{
+		session.setCourse(this);
+		this.sessions.add(session);
+	}
+	
+	public void removeSession(Session session){
+		SessionRepository.remove(session.getId());
+		this.sessions.remove(session);
+	}
+
+	public void setTitle(String title) {
 		this.title = title;
 	}
 
@@ -54,31 +92,51 @@ public class Course {
     }
     
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Course other = (Course) obj;
-        if (!Objects.equals(this.title, other.title)) {
-            return false;
-        }
-        if (!Objects.equals(this.description, other.description)) {
-            return false;
-        }
-        if (!Objects.equals(this.code, other.code)) {
-            return false;
-        }
-        return true;
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((sessions == null) ? 0 : sessions.hashCode());
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Course other = (Course) obj;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		} else if (!code.equals(other.code))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (sessions == null) {
+			if (other.sessions != null)
+				return false;
+		} else if (!sessions.equals(other.sessions))
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
+		return true;
+	}
 
     @Override
-    public String toString() {
-        return "Course{" + "description=" + description + ", code=" + code + ", title=" + title + '}';
-    }
+	public String toString() {
+		return "Course [code=" + code + ", title=" + title + ", description=" + description + ", sessions=" + sessions
+				+ "]";
+	}
 }

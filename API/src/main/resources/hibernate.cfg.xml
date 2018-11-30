@@ -12,7 +12,7 @@
 			 org.hibernate.dialect.MySQLDialect
 		</property>
 		<property name="connection.driver_class">
-			com.mysql.jdbc.Driver
+			com.mysql.cj.jdbc.Driver
 		</property>
 		
         <property name="show_sql">false</property>
@@ -30,11 +30,10 @@
         
 
         <!-- mapping files -->
-    	<mapping  class="org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Course" resource="org/vinksel/ultimateprojectofdoom3000lesdeuxtours/entities/Course.hbm.xml"/>
-    	<mapping  class="org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Location" resource="org/vinksel/ultimateprojectofdoom3000lesdeuxtours/entities/Location.hbm.xml"/>
-    	<mapping  class="org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Session" resource="org/vinksel/ultimateprojectofdoom3000lesdeuxtours/entities/Session.hbm.xml"/>
-    	<mapping  class="org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.User" resource="org/vinksel/ultimateprojectofdoom3000lesdeuxtours/entities/User.hbm.xml"/>
-        
+    	<mapping  class="org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Course"/>
+    	<mapping  class="org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Location" />
+    	<mapping  class="org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Session" />
+    	<mapping  class="org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.User" />
 
         <!-- cache settings -->
         <class-cache class="org.hibernate.auction.Item" usage="read-write"/>
