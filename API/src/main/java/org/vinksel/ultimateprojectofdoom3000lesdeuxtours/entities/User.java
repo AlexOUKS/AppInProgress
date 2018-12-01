@@ -20,7 +20,6 @@ public class User{
 	@Id
 	@Column(name="user_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotNull(message = "ID can not be null.")
 	private Integer userId;
 
 	@Column(nullable = false)

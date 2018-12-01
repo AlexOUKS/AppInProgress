@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Auth from './auth/Auth';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 require('dotenv').config()
 
