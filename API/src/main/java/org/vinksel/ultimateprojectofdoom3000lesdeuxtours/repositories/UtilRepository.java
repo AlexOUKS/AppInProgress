@@ -3,6 +3,7 @@ package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories;
 import java.io.IOException;
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.hibernate.SessionFactoryUtil;
@@ -19,21 +20,21 @@ public class UtilRepository {
 		return instance;
 	};
 	
-	public void update(Object obj) {
+	public void update(Object obj) throws Exception{
 		Session session = SessionFactoryUtil.getSessionFactory().openSession();
 		try {session.update(obj);}
-		catch(Exception e){e.printStackTrace();}
+		catch(HibernateException e){throw e;}
 		finally {session.close();}
 	}
 
-	public void save(Object obj){
+	public void save(Object obj) throws Exception{
 		Session session = SessionFactoryUtil.getSessionFactory().openSession();
 		try {session.save(obj);}
-		catch(Exception e){e.printStackTrace();}
+		catch(Exception e){throw e;}
 		finally {session.close();}
 	}
 
-	public void remove(Object obj){
+	public void remove(Object obj) throws Exception{
 		Session session = SessionFactoryUtil.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
@@ -42,12 +43,12 @@ public class UtilRepository {
 		}
 		catch(Exception e){
             session.getTransaction().rollback();
-            e.printStackTrace();
+            throw e;
         } finally {
 			session.close();
 		}
 	}
-	public Object get(Integer id) throws IOException{
+	public Object get(Integer id) throws Exception{
 		classNameIsDefined();
 		Session session = SessionFactoryUtil.getSessionFactory().openSession();
 		Object obj = null;
@@ -55,22 +56,21 @@ public class UtilRepository {
 		try {
 			
 			obj =  session.get(getClassName(), id);
-		} catch(Exception e){
-            e.printStackTrace();
-		}finally {
+		} catch(Exception e){throw e;}
+		finally {
 			session.close();
 		}
 		
 		return obj;
 	}
 	
-	protected void classNameIsDefined() throws IOException
+	protected void classNameIsDefined() throws Exception
 	{
 		if(getClassName() == null)
-			throw new IOException("ClassName of the repository must be defined !");
+			throw new IllegalArgumentException("ClassName of the repository must be defined !");
 	}
 	
-	public List<Object> getAll() throws IOException{
+	public List<Object> getAll() throws Exception{
 		classNameIsDefined();
 		Session session = SessionFactoryUtil.getSessionFactory().openSession();
 		List<Object> listObject = null;
@@ -79,9 +79,8 @@ public class UtilRepository {
 			
 			Query<Object> qry = session.createQuery("from " + getClassName().getName());
 			listObject = qry.list();
-		} catch(Exception e){
-            e.printStackTrace();
-		}finally {
+		} catch(Exception e){throw e; }
+		finally {
 			session.close();
 		}
 		

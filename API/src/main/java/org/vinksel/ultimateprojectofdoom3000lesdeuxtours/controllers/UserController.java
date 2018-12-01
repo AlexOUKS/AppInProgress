@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Course;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.User;
+import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.exceptions.ResponseEntityUtil;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.CourseRepository;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.UserRepository;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.validators.Validators;
@@ -31,7 +32,7 @@ public class UserController {
 	
 	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("/login")
-	public ResponseEntity<Object> courses(@RequestParam(value="login", required = true) String login,
+	public ResponseEntity<?> courses(@RequestParam(value="login", required = true) String login,
 										@RequestParam(value="password", required = true) String password) throws UnsupportedEncodingException, NoSuchAlgorithmException{	
 		
 		if (!Validators.isStringEmpty(login) && !Validators.isStringEmpty(password)) {
@@ -54,7 +55,11 @@ public class UserController {
 				String token = DigestUtils.md5DigestAsHex(bytes);
 				
 				user.setToken(token);
-				UserRepository.getInstance().update(user);
+				try {
+					UserRepository.getInstance().update(user);
+				} catch (Exception e) {
+					return ResponseEntityUtil.modifiedElement();
+				}
 			
 	
 				return new ResponseEntity<Object>(token, HttpStatus.OK); 
