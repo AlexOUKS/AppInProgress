@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Course;
+import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.exceptions.ResponseEntityUtil;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.CourseRepository;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.validators.Validators;
 
@@ -23,13 +24,13 @@ public class CourseController {
 		try {
 			System.out.println(CourseRepository.className);
 			courses = CourseRepository.getInstance().getAll();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			return ResponseEntityUtil.responseForException(e);
 		}
         if (Validators.isArrayEmpty(courses)) {
-            return new ResponseEntity<String>("Liste vide", HttpStatus.OK);
+            return ResponseEntityUtil.voidList();
         } else {
-            return new ResponseEntity<List<Object>>(courses, HttpStatus.OK);
+            return ResponseEntityUtil.objectList(courses);
             
         }
 	}
@@ -37,16 +38,26 @@ public class CourseController {
 	@RequestMapping("/course/delete/{id}") 
 	public ResponseEntity<?> deleteCourse(@PathVariable String id)
 	{
-		CourseRepository.getInstance().remove(id);
-        return new ResponseEntity<String>("Elément supprimé", HttpStatus.OK);
+        try {
+			CourseRepository.getInstance().remove(id);
+		} catch (Exception e) {
+			return ResponseEntityUtil.responseForException(e);
+		}
+		return ResponseEntityUtil.deletedElement();
 	}
 	
-	@RequestMapping("/course/edit/") 
-	public ResponseEntity<?> editCourse(@RequestParam(value="code", defaultValue="null") String code,
+	@RequestMapping("/course/edit/{id}") 
+	public ResponseEntity<?> editCourse(@PathVariable String id, @RequestParam(value="code", defaultValue="null") String code,
 			@RequestParam(value="title", defaultValue="null") String title,
 			@RequestParam(value="desc", defaultValue="null") String description)
 	{
-        return new ResponseEntity<String>("Elément modifié", HttpStatus.OK);
+		ResponseEntity<?> CourseResponse;
+		try {
+			CourseRepository.getInstance().get(id);
+		} catch (Exception e) {
+			return ResponseEntityUtil.responseForException(e);
+		}
+        return ResponseEntityUtil.modifiedElement();
 	}
 	
 	@RequestMapping("/courses/add") 
@@ -55,6 +66,11 @@ public class CourseController {
 			@RequestParam(value="desc", defaultValue="null") String description
 		)	
 	{
-        return new ResponseEntity<String>("Elément créé", HttpStatus.OK);
+		if(code == null || title == null || description == null)
+			return ResponseEntityUtil.badValues();
+		
+		Course course = new Course(code, title, description);
+		
+        return ResponseEntityUtil.createdElement();
 	}
 }

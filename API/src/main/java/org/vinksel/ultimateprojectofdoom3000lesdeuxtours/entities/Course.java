@@ -66,7 +66,7 @@ public class Course {
 		this.sessions.add(session);
 	}
 	
-	public void removeSession(Session session){
+	public void removeSession(Session session) throws Exception{
 		SessionRepository.getInstance().remove(session.getId());
 		this.sessions.remove(session);
 	}
