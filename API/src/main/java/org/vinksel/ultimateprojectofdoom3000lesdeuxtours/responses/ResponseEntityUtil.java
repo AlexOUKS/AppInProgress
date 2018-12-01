@@ -1,4 +1,4 @@
-package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.exceptions;
+package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.responses;
 
 import java.util.List;
 
@@ -29,6 +29,9 @@ public class ResponseEntityUtil {
 	}
 	static public ResponseEntity<List<Object>> objectList(List<Object> objs){
 		return new ResponseEntity<List<Object>>(objs, HttpStatus.OK);
+	}
+	static public ResponseEntity<Object> viewObject(Object obj){
+		return new ResponseEntity<Object>(obj, HttpStatus.OK);
 	}
 	static public ResponseEntity<String> responseForException(Exception e)
 	{

@@ -22,7 +22,6 @@ public class Location {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotNull(message = "ID can not be null.")
 	@Column(name="location_id")
 	private Integer id;
 	
@@ -34,14 +33,31 @@ public class Location {
 	@JsonIgnore
 	private Set<Session> sessions = new HashSet<Session>();
 	
+	@Transient
+	private Integer nbSessions = 0;
+	
 	public Location(){};
 	
     public Location(Integer id, String city) {
         this.id = id;
         this.city = city;
     }
+    public Location(Integer id, String city, Set<Session> sessions) {
+        this.id = id;
+        this.city = city;
+        this.sessions = sessions;
+        this.nbSessions = sessions.size();
+    }
     
-    private void setId(Integer id) {
+    public Integer getNbSessions() {
+		return nbSessions;
+	}
+
+	public void setNbSessions(Integer nbSessions) {
+		this.nbSessions = nbSessions;
+	}
+
+	private void setId(Integer id) {
 		this.id = id;
     }
 
@@ -59,6 +75,13 @@ public class Location {
 
 	public void setSessions(Set<Session> sessions) {
 		this.sessions = sessions;
+        this.nbSessions = sessions.size();
+	}
+	
+	public void addSession(Session session){
+		session.setLocation(this);
+		this.sessions.add(session);
+		this.nbSessions++;
 	}
 
 	public Integer getId() {

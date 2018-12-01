@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Course;
-import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.exceptions.ResponseEntityUtil;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.CourseRepository;
+import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.responses.ResponseEntityUtil;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.validators.Validators;
 
 @RestController
@@ -35,6 +35,18 @@ public class CourseController {
         }
 	}
 	
+	@RequestMapping("/course/view/{id}")
+	public ResponseEntity<?> getCourse(@PathVariable String id)
+	{
+		Course course;
+        try {
+        	course = CourseRepository.getInstance().get(id);
+		} catch (Exception e) {
+			return ResponseEntityUtil.responseForException(e);
+		}
+		return ResponseEntityUtil.viewObject(course);
+	}
+	
 	@RequestMapping("/course/delete/{id}") 
 	public ResponseEntity<?> deleteCourse(@PathVariable String id)
 	{
@@ -51,9 +63,18 @@ public class CourseController {
 			@RequestParam(value="title", defaultValue="null") String title,
 			@RequestParam(value="desc", defaultValue="null") String description)
 	{
-		ResponseEntity<?> CourseResponse;
 		try {
-			CourseRepository.getInstance().get(id);
+			Course course = CourseRepository.getInstance().get(id);
+			
+			if(code != null)
+				course.setCode(code);
+			if(title != null)
+				course.setTitle(title);
+			if(description != null)
+				course.setDescription(description);
+			
+			CourseRepository.getInstance().update(course);
+			
 		} catch (Exception e) {
 			return ResponseEntityUtil.responseForException(e);
 		}
@@ -70,6 +91,12 @@ public class CourseController {
 			return ResponseEntityUtil.badValues();
 		
 		Course course = new Course(code, title, description);
+		
+		try {
+			CourseRepository.getInstance().save(course);
+		} catch (Exception e) {
+			return ResponseEntityUtil.responseForException(e);
+		}
 		
         return ResponseEntityUtil.createdElement();
 	}
