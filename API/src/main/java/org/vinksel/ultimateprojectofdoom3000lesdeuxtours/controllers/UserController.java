@@ -71,8 +71,73 @@ public class UserController {
 			return new ResponseEntity<>("Login/password vide", HttpStatus.BAD_REQUEST);
 		}
 		
+		
+		
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@PostMapping("/newUser")
+	public ResponseEntity<Object> newUser(
+										@RequestParam(value="lastname", required = true) String lastname,
+										@RequestParam(value="firstname", required = true) String firstname,
+										@RequestParam(value="address", required = true) String address,
+										@RequestParam(value="phone", required = true) String phone,
+										@RequestParam(value="email", required = true) String email,
+										@RequestParam(value="username", required = true) String username,
+										@RequestParam(value="password", required = true) String password) throws UnsupportedEncodingException {
+		
+		if (!Validators.isStringEmpty(lastname) 
+				&& !Validators.isStringEmpty(firstname)
+				&& !Validators.isStringEmpty(address)
+				&& !Validators.isStringEmpty(phone)
+				&& !Validators.isStringEmpty(email)
+				&& !Validators.isStringEmpty(username)
+				&& !Validators.isStringEmpty(password)) {
+			
+			User user = (User) UserRepository.getInstance().getUser(username);
+			
+			if (!Validators.isNull(user)) {
+				return new ResponseEntity<>("Utilisateur déjà existant", HttpStatus.BAD_REQUEST);
+			}
+			
+			User newUser = new User();
+			newUser.setUsername(username);
+			newUser.setAddress(address);
+			newUser.setPhone(phone);
+			newUser.setCourrielElectronique(email);
+			newUser.setFirstname(firstname);
+			newUser.setLastname(lastname);
+			
+			SecureRandom random = new SecureRandom();
+			byte bytes[] = new byte[50];
+			random.nextBytes(bytes);
+			String grainsel = DigestUtils.md5DigestAsHex(bytes);
+			
+			newUser.setGrainsel(grainsel);
+			
+			String PasswordGrainsel = password+newUser.getGrainsel();
+			byte[] byteChaine = PasswordGrainsel.getBytes("UTF-8");
+			String mdp = DigestUtils.md5DigestAsHex(byteChaine);
+			
+			newUser.setPassword(mdp);
+			newUser.setToken("tokenIsWaitingToBeGenerated");
+			
+			try {
+				UserRepository.getInstance().save(newUser);
+			} catch (Exception e) {
+				
+			}
+			
+			return new ResponseEntity<>("Utilisateur créé", HttpStatus.OK);
+			
+			
+		}else {
+			return new ResponseEntity<>("Un champ est vide", HttpStatus.BAD_REQUEST);
+		}
+		
+		
+	
+	}
 	@RequestMapping("/profile/{id}")
 	public User see_profile(@PathVariable String id){ //To see other user profile
 		return null;
