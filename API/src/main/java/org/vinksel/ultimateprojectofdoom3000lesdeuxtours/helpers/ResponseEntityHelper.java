@@ -1,4 +1,4 @@
-package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.responses;
+package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.helpers;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 
 import javassist.NotFoundException;
 
-public class ResponseEntityUtil {
+public class ResponseEntityHelper {
 	static public ResponseEntity<String> modifiedElement()
 	{
 		return new ResponseEntity<String>("Elément modifié !", HttpStatus.OK);
@@ -35,6 +35,7 @@ public class ResponseEntityUtil {
 	}
 	static public ResponseEntity<String> responseForException(Exception e)
 	{
+		e.printStackTrace();
 		if(e.getClass() == HibernateException.class)
 			return new ResponseEntity<String>("Erreur interne !", HttpStatus.INTERNAL_SERVER_ERROR);
 		if(e.getClass() == NotFoundException.class)

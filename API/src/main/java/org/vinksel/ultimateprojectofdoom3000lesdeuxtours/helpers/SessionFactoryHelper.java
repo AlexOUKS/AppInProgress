@@ -1,11 +1,11 @@
-package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.hibernate;
+package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.helpers;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-public class SessionFactoryUtil {
+public class SessionFactoryHelper {
 
 	private static SessionFactory sessionFactory;
 	
