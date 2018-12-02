@@ -9,7 +9,7 @@ import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.User;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.hibernate.SessionFactoryUtil;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.validators.Validators;
 
-public class UserRepository extends UtilRepository {
+public class UserRepository extends Repository {
 	private static Class className = User.class;
 	private static UserRepository instance;
 

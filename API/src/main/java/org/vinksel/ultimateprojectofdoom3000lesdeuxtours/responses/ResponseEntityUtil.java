@@ -35,6 +35,7 @@ public class ResponseEntityUtil {
 	}
 	static public ResponseEntity<String> responseForException(Exception e)
 	{
+		e.printStackTrace();
 		if(e.getClass() == HibernateException.class)
 			return new ResponseEntity<String>("Erreur interne !", HttpStatus.INTERNAL_SERVER_ERROR);
 		if(e.getClass() == NotFoundException.class)

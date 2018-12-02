@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Course;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.hibernate.SessionFactoryUtil;
 
-public class CourseRepository extends UtilRepository {
+public class CourseRepository extends Repository {
 	public static Class className = Course.class;
 	private static CourseRepository instance;
 

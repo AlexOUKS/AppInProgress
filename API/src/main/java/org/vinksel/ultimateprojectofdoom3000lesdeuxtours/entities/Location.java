@@ -33,9 +33,6 @@ public class Location {
 	@JsonIgnore
 	private Set<Session> sessions = new HashSet<Session>();
 	
-	@Transient
-	private Integer nbSessions = 0;
-	
 	public Location(){};
 	
     public Location(Integer id, String city) {
@@ -46,17 +43,8 @@ public class Location {
         this.id = id;
         this.city = city;
         this.sessions = sessions;
-        this.nbSessions = sessions.size();
     }
     
-    public Integer getNbSessions() {
-		return nbSessions;
-	}
-
-	public void setNbSessions(Integer nbSessions) {
-		this.nbSessions = nbSessions;
-	}
-
 	private void setId(Integer id) {
 		this.id = id;
     }
@@ -75,13 +63,11 @@ public class Location {
 
 	public void setSessions(Set<Session> sessions) {
 		this.sessions = sessions;
-        this.nbSessions = sessions.size();
 	}
 	
 	public void addSession(Session session){
 		session.setLocation(this);
 		this.sessions.add(session);
-		this.nbSessions++;
 	}
 
 	public Integer getId() {

@@ -2,7 +2,7 @@ package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories;
 
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Location;
 
-public class LocationRepository extends UtilRepository{
+public class LocationRepository extends Repository{
 	private Class className = Location.class;
 	private static LocationRepository instance;
 

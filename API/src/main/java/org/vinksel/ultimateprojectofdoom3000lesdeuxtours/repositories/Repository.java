@@ -8,15 +8,15 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.hibernate.SessionFactoryUtil;
 
-public class UtilRepository {
+public class Repository {
 
 	private static Class className;
-	private static UtilRepository instance;
-	protected UtilRepository(){};
+	private static Repository instance;
+	protected Repository(){};
 	
-	static public UtilRepository getInstance(){
+	static public Repository getInstance(){
 		if(instance == null)
-			instance = new UtilRepository();
+			instance = new Repository();
 		return instance;
 	};
 	

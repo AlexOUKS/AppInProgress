@@ -2,7 +2,7 @@ package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories;
 
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Session;
 
-public class SessionRepository extends UtilRepository {
+public class SessionRepository extends Repository {
 	private static Class className = Session.class;
 	private static SessionRepository instance;
 

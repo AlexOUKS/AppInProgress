@@ -22,7 +22,6 @@ public class CourseController {
 	{
 		List<Object> courses = new ArrayList<Object>();
 		try {
-			System.out.println(CourseRepository.className);
 			courses = CourseRepository.getInstance().getAll();
 		} catch (Exception e) {
 			return ResponseEntityUtil.responseForException(e);
@@ -31,7 +30,6 @@ public class CourseController {
             return ResponseEntityUtil.voidList();
         } else {
             return ResponseEntityUtil.objectList(courses);
-            
         }
 	}
 	
@@ -81,7 +79,7 @@ public class CourseController {
         return ResponseEntityUtil.modifiedElement();
 	}
 	
-	@RequestMapping("/courses/add") 
+	@RequestMapping("/course/add") 
 	public ResponseEntity<?> createCourse(@RequestParam(value="code", defaultValue="null") String code,
 			@RequestParam(value="title", defaultValue="null") String title,
 			@RequestParam(value="desc", defaultValue="null") String description
