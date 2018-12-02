@@ -77,7 +77,7 @@ public class UserController {
 	
 	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("/newUser")
-	public ResponseEntity<Object> newUser(
+	public ResponseEntity<String> newUser(
 										@RequestParam(value="lastname", required = true) String lastname,
 										@RequestParam(value="firstname", required = true) String firstname,
 										@RequestParam(value="address", required = true) String address,
@@ -125,7 +125,7 @@ public class UserController {
 			try {
 				UserRepository.getInstance().save(newUser);
 			} catch (Exception e) {
-				
+				return ResponseEntityUtil.responseForException(e);
 			}
 			
 			return new ResponseEntity<>("Utilisateur créé", HttpStatus.OK);

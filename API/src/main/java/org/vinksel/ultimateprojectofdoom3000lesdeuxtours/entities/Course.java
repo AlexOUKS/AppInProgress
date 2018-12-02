@@ -14,6 +14,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.SessionRepository;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.gson.Gson;
 
 @Entity
 @DynamicUpdate
@@ -95,6 +96,9 @@ public class Course {
         return title;
     }
     
+    public String toJson() {
+    	return "";
+    }
     @Override
 	public int hashCode() {
 		final int prime = 31;
