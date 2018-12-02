@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Course;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.User;
+import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.helpers.ResponseEntityHelper;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.CourseRepository;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.UserRepository;
-import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.responses.ResponseEntityUtil;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.validators.Validators;
 
 import com.google.gson.Gson;
@@ -58,7 +58,7 @@ public class UserController {
 				try {
 					UserRepository.getInstance().update(user);
 				} catch (Exception e) {
-					return ResponseEntityUtil.modifiedElement();
+					return ResponseEntityHelper.modifiedElement();
 				}
 			
 	

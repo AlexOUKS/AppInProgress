@@ -6,7 +6,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.hibernate.SessionFactoryUtil;
+import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.helpers.SessionFactoryHelper;
 
 public class Repository {
 
@@ -21,21 +21,21 @@ public class Repository {
 	};
 	
 	public void update(Object obj) throws Exception{
-		Session session = SessionFactoryUtil.getSessionFactory().openSession();
+		Session session = SessionFactoryHelper.getSessionFactory().openSession();
 		try {session.update(obj);}
 		catch(HibernateException e){throw e;}
 		finally {session.close();}
 	}
 
 	public void save(Object obj) throws Exception{
-		Session session = SessionFactoryUtil.getSessionFactory().openSession();
+		Session session = SessionFactoryHelper.getSessionFactory().openSession();
 		try {session.save(obj);}
 		catch(Exception e){throw e;}
 		finally {session.close();}
 	}
 
 	public void remove(Object obj) throws Exception{
-		Session session = SessionFactoryUtil.getSessionFactory().openSession();
+		Session session = SessionFactoryHelper.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
 			session.delete(obj);
@@ -50,7 +50,7 @@ public class Repository {
 	}
 	public Object get(Integer id) throws Exception{
 		classNameIsDefined();
-		Session session = SessionFactoryUtil.getSessionFactory().openSession();
+		Session session = SessionFactoryHelper.getSessionFactory().openSession();
 		Object obj = null;
 		
 		try {
@@ -72,7 +72,7 @@ public class Repository {
 	
 	public List<Object> getAll() throws Exception{
 		classNameIsDefined();
-		Session session = SessionFactoryUtil.getSessionFactory().openSession();
+		Session session = SessionFactoryHelper.getSessionFactory().openSession();
 		List<Object> listObject = null;
 		
 		try {

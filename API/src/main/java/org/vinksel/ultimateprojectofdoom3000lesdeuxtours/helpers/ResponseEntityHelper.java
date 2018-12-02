@@ -1,4 +1,4 @@
-package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.responses;
+package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.helpers;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 
 import javassist.NotFoundException;
 
-public class ResponseEntityUtil {
+public class ResponseEntityHelper {
 	static public ResponseEntity<String> modifiedElement()
 	{
 		return new ResponseEntity<String>("Elément modifié !", HttpStatus.OK);

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Course;
+import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.helpers.ResponseEntityHelper;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.CourseRepository;
-import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.responses.ResponseEntityUtil;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.validators.Validators;
 
 @RestController
@@ -24,12 +24,12 @@ public class CourseController {
 		try {
 			courses = CourseRepository.getInstance().getAll();
 		} catch (Exception e) {
-			return ResponseEntityUtil.responseForException(e);
+			return ResponseEntityHelper.responseForException(e);
 		}
         if (Validators.isArrayEmpty(courses)) {
-            return ResponseEntityUtil.voidList();
+            return ResponseEntityHelper.voidList();
         } else {
-            return ResponseEntityUtil.objectList(courses);
+            return ResponseEntityHelper.objectList(courses);
         }
 	}
 	
@@ -40,9 +40,9 @@ public class CourseController {
         try {
         	course = CourseRepository.getInstance().get(id);
 		} catch (Exception e) {
-			return ResponseEntityUtil.responseForException(e);
+			return ResponseEntityHelper.responseForException(e);
 		}
-		return ResponseEntityUtil.viewObject(course);
+		return ResponseEntityHelper.viewObject(course);
 	}
 	
 	@RequestMapping("/course/delete/{id}") 
@@ -51,9 +51,9 @@ public class CourseController {
         try {
 			CourseRepository.getInstance().remove(id);
 		} catch (Exception e) {
-			return ResponseEntityUtil.responseForException(e);
+			return ResponseEntityHelper.responseForException(e);
 		}
-		return ResponseEntityUtil.deletedElement();
+		return ResponseEntityHelper.deletedElement();
 	}
 	
 	@RequestMapping("/course/edit/{id}") 
@@ -74,9 +74,9 @@ public class CourseController {
 			CourseRepository.getInstance().update(course);
 			
 		} catch (Exception e) {
-			return ResponseEntityUtil.responseForException(e);
+			return ResponseEntityHelper.responseForException(e);
 		}
-        return ResponseEntityUtil.modifiedElement();
+        return ResponseEntityHelper.modifiedElement();
 	}
 	
 	@RequestMapping("/course/add") 
@@ -86,16 +86,16 @@ public class CourseController {
 		)	
 	{
 		if(code == null || title == null || description == null)
-			return ResponseEntityUtil.badValues();
+			return ResponseEntityHelper.badValues();
 		
 		Course course = new Course(code, title, description);
 		
 		try {
 			CourseRepository.getInstance().save(course);
 		} catch (Exception e) {
-			return ResponseEntityUtil.responseForException(e);
+			return ResponseEntityHelper.responseForException(e);
 		}
 		
-        return ResponseEntityUtil.createdElement();
+        return ResponseEntityHelper.createdElement();
 	}
 }

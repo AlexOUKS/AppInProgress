@@ -112,7 +112,7 @@ public class Location {
 
     @Override
 	public String toString() {
-		return "Location [id=" + id + ", city=" + city + ", sessions=" + sessions + "]";
+		return "Location [id=" + id + ", city=" + city + "]";
 	}
     
 }

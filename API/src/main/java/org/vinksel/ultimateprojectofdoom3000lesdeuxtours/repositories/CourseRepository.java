@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Course;
-import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.hibernate.SessionFactoryUtil;
+import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.helpers.SessionFactoryHelper;
 
 public class CourseRepository extends Repository {
 	public static Class className = Course.class;
@@ -27,7 +27,7 @@ public class CourseRepository extends Repository {
 
 	public Course get(String id) throws Exception{
 		classNameIsDefined();
-		Session session = SessionFactoryUtil.getSessionFactory().openSession();
+		Session session = SessionFactoryHelper.getSessionFactory().openSession();
 		Course obj = null;
 		
 		try {

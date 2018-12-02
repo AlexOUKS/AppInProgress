@@ -134,7 +134,7 @@ public class User{
     }
 
     @SuppressWarnings("unused")
-	private Integer getUserId() {
+	public Integer getUserId() {
         return userId;
     }
 
