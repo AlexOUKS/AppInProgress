@@ -3,6 +3,7 @@ package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.controllers;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Course;
+import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Location;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.User;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.helpers.ResponseEntityHelper;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.CourseRepository;
+import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.LocationRepository;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.UserRepository;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.validators.Validators;
 
@@ -25,11 +28,7 @@ import com.google.gson.Gson;
 
 @RestController
 public class UserController {
-	@RequestMapping("/mycourses")
-	public String courses(){
-		return null; 
-	}
-	
+
 	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("/login")
 	public ResponseEntity<?> courses(@RequestParam(value="login", required = true) String login,
@@ -125,7 +124,7 @@ public class UserController {
 			try {
 				UserRepository.getInstance().save(newUser);
 			} catch (Exception e) {
-				return ResponseEntityUtil.responseForException(e);
+				return ResponseEntityHelper.responseForException(e);
 			}
 			
 			return new ResponseEntity<>("Utilisateur créé", HttpStatus.OK);
@@ -138,8 +137,19 @@ public class UserController {
 		
 	
 	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping("/profile/{id}")
-	public User see_profile(@PathVariable String id){ //To see other user profile
-		return null;
+	public ResponseEntity<?> see_profile(@PathVariable Integer id){ //To see other user profile
+		User user;
+		try {
+			user = (User) UserRepository.getInstance().get(id);
+		} catch (Exception e) {
+			return ResponseEntityHelper.responseForException(e);
+		}
+		ArrayList finalResponse = new ArrayList();
+		finalResponse.add(user);
+		
+		return ResponseEntityHelper.viewObject(finalResponse);
 	}
 }

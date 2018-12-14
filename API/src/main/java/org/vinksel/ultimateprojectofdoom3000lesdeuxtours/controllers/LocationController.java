@@ -9,6 +9,7 @@ import java.util.Set;
 
 import org.hibernate.Hibernate;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +27,7 @@ import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.validators.Validators;
 
 @RestController
 public class LocationController {
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping("/locations") 
 	public ResponseEntity<?> locations()
 	{
@@ -42,6 +44,7 @@ public class LocationController {
         }
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping("/location/{id}/") 
 	public ResponseEntity<?> getLocation(@PathVariable Integer id)
 	{
@@ -65,10 +68,11 @@ public class LocationController {
 		return ResponseEntityHelper.viewObject(finalResponse);
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping("/location/add")
 	public ResponseEntity<?> createLocation(@RequestParam(value="name", defaultValue="null") String name)	
 	{
-		if(name == null)
+		if(Validators.isNull(name))
 			return ResponseEntityHelper.badValues();
 		
 		Location location = new Location();
@@ -83,13 +87,14 @@ public class LocationController {
         return ResponseEntityHelper.createdElement();
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping("/location/edit/{id}") 
 	public ResponseEntity<?> editLocation(@PathVariable Integer id, @RequestParam(value="name", defaultValue="null") String name)
 	{
 		try {
 			Location location = (Location) LocationRepository.getInstance().get(id);
 			
-			if(name != null)
+			if(!Validators.isNull(name))
 				location.setCity(name);
 			
 			LocationRepository.getInstance().update(location);
@@ -100,6 +105,7 @@ public class LocationController {
         return ResponseEntityHelper.modifiedElement();
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping("/location/delete/{id}") 
 	public ResponseEntity<?> deleteLocation(@PathVariable Integer id)
 	{

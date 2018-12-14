@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,8 @@ import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.validators.Validators;
 
 @RestController
 public class CourseController {
+	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping("/courses") 
 	public ResponseEntity<?> courses()
 	{
@@ -33,6 +36,7 @@ public class CourseController {
         }
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping("/course/view/{id}")
 	public ResponseEntity<?> getCourse(@PathVariable String id)
 	{
@@ -45,6 +49,7 @@ public class CourseController {
 		return ResponseEntityHelper.viewObject(course);
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping("/course/delete/{id}") 
 	public ResponseEntity<?> deleteCourse(@PathVariable String id)
 	{
@@ -56,6 +61,7 @@ public class CourseController {
 		return ResponseEntityHelper.deletedElement();
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping("/course/edit/{id}") 
 	public ResponseEntity<?> editCourse(@PathVariable String id, @RequestParam(value="code", defaultValue="null") String code,
 			@RequestParam(value="title", defaultValue="null") String title,
@@ -64,11 +70,11 @@ public class CourseController {
 		try {
 			Course course = CourseRepository.getInstance().get(id);
 			
-			if(code != null)
+			if(!Validators.isNull(code))
 				course.setCode(code);
-			if(title != null)
+			if(!Validators.isNull(title))
 				course.setTitle(title);
-			if(description != null)
+			if(!Validators.isNull(description))
 				course.setDescription(description);
 			
 			CourseRepository.getInstance().update(course);
@@ -79,13 +85,14 @@ public class CourseController {
         return ResponseEntityHelper.modifiedElement();
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping("/course/add") 
 	public ResponseEntity<?> createCourse(@RequestParam(value="code", defaultValue="null") String code,
 			@RequestParam(value="title", defaultValue="null") String title,
 			@RequestParam(value="desc", defaultValue="null") String description
 		)	
 	{
-		if(code == null || title == null || description == null)
+		if(!Validators.isNull(code) || !Validators.isNull(title) || !Validators.isNull(description))
 			return ResponseEntityHelper.badValues();
 		
 		Course course = new Course(code, title, description);

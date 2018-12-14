@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.validators.Validators;
 @RestController
 
 public class SessionController {
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping("/sessions") 
 	public ResponseEntity<?> sessions()
 	{
@@ -39,6 +41,7 @@ public class SessionController {
         }
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping("/session/{id}/") 
 	public ResponseEntity<?> getSession(@PathVariable Integer id)
 	{
@@ -53,6 +56,7 @@ public class SessionController {
 		return ResponseEntityHelper.viewObject(session);
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping("/session/add")
 	public ResponseEntity<?> createSession(
 			@RequestParam(value="courseID", defaultValue="null") String courseID,
@@ -62,7 +66,7 @@ public class SessionController {
 			@RequestParam(value="max_student", defaultValue="null") Integer max_student
 		)	
 	{
-		if(courseID == null || locationID == null || start_date == null || end_date == null || max_student == null)
+		if(!Validators.isNull(courseID) || !Validators.isNull(locationID) || !Validators.isNull(start_date) || !Validators.isNull(end_date) || !Validators.isNull(max_student))
 			return ResponseEntityHelper.badValues();
 		
 		Session session = new Session();
@@ -82,6 +86,7 @@ public class SessionController {
         return ResponseEntityHelper.createdElement();
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping("/session/edit/{id}") 
 	public ResponseEntity<?> editSession(
 			@PathVariable Integer id, 
@@ -95,15 +100,15 @@ public class SessionController {
 		try {
 			Session session = (Session) SessionRepository.getInstance().get(id);
 			
-			if(courseID != null)
+			if(!Validators.isNull(courseID))
 				session.setCourse(CourseRepository.getInstance().get(courseID));
-			if(locationID != null)
+			if(!Validators.isNull(locationID))
 				session.setLocation((Location) LocationRepository.getInstance().get(locationID));
-			if(start_date != null)
+			if(!Validators.isNull(start_date))
 				session.setStart_date(start_date);
-			if(end_date != null)
+			if(!Validators.isNull(end_date))
 				session.setEnd_date(end_date);
-			if(max_student != null)
+			if(!Validators.isNull(max_student))
 				session.setMax_students(max_student);
 			
 			SessionRepository.getInstance().update(session);
@@ -114,6 +119,7 @@ public class SessionController {
         return ResponseEntityHelper.modifiedElement();
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping("/session/delete/{id}") 
 	public ResponseEntity<?> deleteSession(@PathVariable Integer id)
 	{
