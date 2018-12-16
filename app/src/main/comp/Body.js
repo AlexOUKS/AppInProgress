@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Sessions from '../sessions/Sessions';
 
 class Body extends Component {
     constructor(props) {
@@ -7,6 +8,18 @@ class Body extends Component {
           page: props.page
         };
     }
+
+    componentDidMount() {
+        this.setState({page : this.props.page})
+      }
+
+    componentDidUpdate(prevProps) {
+        if(this.props.page != this.state.page) 
+        {
+               this.componentDidMount();
+        }
+    } 
+
     render() {
         var page = this.state.page;
         if(page == "home")
@@ -24,7 +37,7 @@ class Body extends Component {
         if(page == "sessions")
         {
             return(
-                <h2>Content sessions</h2>
+                <Sessions />
             )
         }
         else{
