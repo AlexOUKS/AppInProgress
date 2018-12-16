@@ -54,6 +54,18 @@ public class Session {
 
 	public Session(){};
 	
+	public void addUser(User user)
+	{
+		this.users.add(user);
+		user.addSession(this);
+	}
+
+	public void rmUser(User user)
+	{
+		this.users.remove(user);
+		user.rmSession(this);
+	}
+	
 	public Session(Integer id, Date start_date, Date end_date, Integer max_students, Course course, Location location) {
         this.id = id;
         this.start_date = start_date;

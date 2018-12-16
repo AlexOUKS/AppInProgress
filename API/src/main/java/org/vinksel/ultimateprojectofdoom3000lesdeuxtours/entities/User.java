@@ -75,6 +75,11 @@ public class User{
 	public String getGrainsel() {
 		return grainsel;
 	}
+	
+	public void addSession(Session session)
+	{
+		this.sessions.add(session);
+	}
 
 	public void setGrainsel(String grainsel) {
 		this.grainsel = grainsel;
@@ -254,6 +259,10 @@ public class User{
 		} else if (!username.equals(other.username))
 			return false;
 		return true;
+	}
+
+	public void rmSession(Session session) {
+		this.sessions.remove(session);
 	}
     
 }

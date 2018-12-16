@@ -15,15 +15,59 @@ import org.springframework.web.bind.annotation.RestController;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Course;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Location;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.Session;
+import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities.User;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.helpers.ResponseEntityHelper;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.CourseRepository;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.LocationRepository;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.SessionRepository;
+import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.repositories.UserRepository;
 import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.validators.Validators;
 
 @RestController
 
 public class SessionController {
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping("/session/{idSession}/register/{idUSer}") 
+	public ResponseEntity<?> register(@PathVariable Integer idSession, @PathVariable Integer idUSer)
+	{
+		Session session;
+		User user;
+		try {
+			session = (Session) SessionRepository.getInstance().get(idSession);
+			user = (User) UserRepository.getInstance().get(idUSer);
+			
+			session.addUser(user);
+			
+			SessionRepository.getInstance().save(session);
+			UserRepository.getInstance().save(user);
+		} catch (Exception e) {
+			return ResponseEntityHelper.responseForException(e);
+		}
+		
+		return ResponseEntityHelper.createdElement();
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping("/session/{idSession}/unregister/{idUSer}") 
+	public ResponseEntity<?> unregister(@PathVariable Integer idSession, @PathVariable Integer idUSer)
+	{
+		Session session;
+		User user;
+		try {
+			session = (Session) SessionRepository.getInstance().get(idSession);
+			user = (User) UserRepository.getInstance().get(idUSer);
+			
+			session.rmUser(user);
+			
+			SessionRepository.getInstance().save(session);
+			UserRepository.getInstance().save(user);
+		} catch (Exception e) {
+			return ResponseEntityHelper.responseForException(e);
+		}
+		
+		return ResponseEntityHelper.createdElement();
+	}
+	
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping("/sessions") 
 	public ResponseEntity<?> sessions()
