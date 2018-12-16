@@ -10,6 +10,17 @@ class Header extends Component {
         };
     }
 
+    crumbs() {
+        console.log(this.props.crumbs);
+        let htmlBuffer = [];
+        this.state.crumbs.forEach(element => {
+            console.log(element);
+            htmlBuffer.push(<li class="crumb">{element}</li>);
+        });
+
+        this.setState({crumbs : htmlBuffer});
+    }
+
     render() {
         return (
             <header>
@@ -19,7 +30,7 @@ class Header extends Component {
                 </nav>
                 <nav id="breadCrumb">
                     <ol>
-                        <Crumbs crumbs={this.state.crumbs} />
+                        {this.state.crumbs}
                     </ol>
                 </nav>
             </header>
@@ -27,17 +38,6 @@ class Header extends Component {
     }
 }
 
-function Crumbs(props)
-{
-    var crumbs = props.crumbs;
-    console.log(props.crumbs);
-    let htmlBuffer = [];
-    crumbs.forEach(element => {
-        console.log(element);
-        htmlBuffer.push(<li class="crumb">{element}</li>);
-    });
 
-    return({htmlBuffer});
-}
 
 export default Header; 
