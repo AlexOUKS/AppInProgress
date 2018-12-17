@@ -37,6 +37,23 @@ public class UserRepository extends Repository {
 		}
 	}
 
+	public List<User> getUsersFromSession(Integer sessionId) {
+		Session session = SessionFactoryHelper.getSessionFactory().openSession();
+		List<User> users;
+		try {
+			Query<User> qry = session.createQuery("select u.userId from User u, Session s where s.id = ? and s in elements(u.sessions)");
+			qry.setParameter(0, sessionId);
+			users = qry.list();
+		} finally {
+			session.close();
+		}
+		
+		if (Validators.isArrayEmpty(users)) {
+			return null;
+		} else {
+			return users;
+		}
+	}
 	@Override
 	protected Class getClassName()
 	{

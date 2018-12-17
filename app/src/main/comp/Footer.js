@@ -4,7 +4,7 @@ class Footer extends Component {
 
     render() {
         return (
-            <h1>Vinksel project Footer</h1>
+            <p>Alexis OUKSEL / Nicolas VINCENT</p>
         );
     }
 }

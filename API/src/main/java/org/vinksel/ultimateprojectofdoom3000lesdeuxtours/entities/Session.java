@@ -7,11 +7,13 @@ package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.entities;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -39,7 +41,6 @@ public class Session {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="course_id")
-	@JsonIgnore
 	@NotNull(message = "A session have to be related to an existing course.")
 	private Course course;
 
@@ -50,7 +51,11 @@ public class Session {
 
 	@ManyToMany(mappedBy = "sessions", fetch = FetchType.EAGER)
 	@JsonIgnore
-	private Set<User> users = new HashSet<User>();
+	private Set<User> users;
+	
+	@Transient
+	private List students;
+
 
 	public Session(){};
 	
@@ -128,6 +133,14 @@ public class Session {
     public Date getEnd_date() {
         return end_date;
     }
+	public List getStudents() {
+		return this.students;
+	}
+
+	public void setStudents(List students) {
+		this.students = students;
+	}
+
 
 
     public Integer getMax_students() {
@@ -145,56 +158,6 @@ public class Session {
 		return result;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Session other = (Session) obj;
-		if (course == null) {
-			if (other.course != null)
-				return false;
-		} else if (!course.equals(other.course))
-			return false;
-		if (end_date == null) {
-			if (other.end_date != null)
-				return false;
-		} else if (!end_date.equals(other.end_date))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (location == null) {
-			if (other.location != null)
-				return false;
-		} else if (!location.equals(other.location))
-			return false;
-		if (max_students == null) {
-			if (other.max_students != null)
-				return false;
-		} else if (!max_students.equals(other.max_students))
-			return false;
-		if (start_date == null) {
-			if (other.start_date != null)
-				return false;
-		} else if (!start_date.equals(other.start_date))
-			return false;
-		if (users == null) {
-			if (other.users != null)
-				return false;
-		} else if (!users.equals(other.users))
-			return false;
-		return true;
-	}
 
-    @Override
-	public String toString() {
-		return "Session [id=" + id + ", start_date=" + start_date + ", end_date=" + end_date + ", max_students="
-				+ max_students + ", course=" + course + ", location=" + location + ", users=" + users + "]";
-	}
+   
 }

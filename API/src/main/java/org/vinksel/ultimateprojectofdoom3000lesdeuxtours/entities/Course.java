@@ -34,6 +34,7 @@ public class Course {
 	
 	//Toute modification de l'attr. course d'une Session modifiera la liste des sessions du-dit objet course
 	@OneToMany(mappedBy="course", fetch = FetchType.EAGER)
+	@JsonIgnore
 	private Set<Session> sessions = new HashSet<Session>();
 
 	public Course(){};
@@ -109,37 +110,6 @@ public class Course {
 		return result;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Course other = (Course) obj;
-		if (code == null) {
-			if (other.code != null)
-				return false;
-		} else if (!code.equals(other.code))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (sessions == null) {
-			if (other.sessions != null)
-				return false;
-		} else if (!sessions.equals(other.sessions))
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		return true;
-	}
 
     @Override
 	public String toString() {

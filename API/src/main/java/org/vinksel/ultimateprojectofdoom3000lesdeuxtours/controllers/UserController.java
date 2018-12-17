@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,7 @@ public class UserController {
 
 	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("/login")
-	public ResponseEntity<?> courses(@RequestParam(value="login", required = true) String login,
+	public ResponseEntity<?> login(@RequestParam(value="login", required = true) String login,
 										@RequestParam(value="password", required = true) String password) throws UnsupportedEncodingException, NoSuchAlgorithmException{	
 		
 		if (!Validators.isStringEmpty(login) && !Validators.isStringEmpty(password)) {
@@ -59,9 +60,12 @@ public class UserController {
 				} catch (Exception e) {
 					return ResponseEntityHelper.modifiedElement();
 				}
-			
+				
+				Hashtable<String, User> response = new Hashtable<String, User>();
+				response.put("user",user);
+				
 	
-				return new ResponseEntity<Object>(token, HttpStatus.OK); 
+				return new ResponseEntity<Object>(response, HttpStatus.OK); 
 			} else {
 				return new ResponseEntity<>("Mauvais identifiants", HttpStatus.BAD_REQUEST);
 			} 

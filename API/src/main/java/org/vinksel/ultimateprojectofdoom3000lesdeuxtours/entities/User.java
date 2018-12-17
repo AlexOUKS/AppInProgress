@@ -26,12 +26,7 @@ public class User{
 	@NotNull(message = "Last name can not be null.")
 	private String lastname;
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", lastname=" + lastname + ", firstname=" + firstname + ", address=" + address
-				+ ", phone=" + phone + ", courrielElectronique=" + courrielElectronique + ", username=" + username
-				+ ", password=" + password + ", grainsel=" + grainsel + ", sessions=" + sessions + "]";
-	}
+
 
 	@Column(nullable = false)
 	@NotNull(message = "First name can not be null.")
@@ -65,9 +60,11 @@ public class User{
 	@NotNull(message = "Token can not be null.")
 	private String token;
 	
+	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="USER_SESSION", joinColumns= @JoinColumn(name="user_id"),
 				inverseJoinColumns = @JoinColumn(name ="session_id"))
+	
 	private Set<Session> sessions =  new HashSet<Session>();
 
 	public User() {}

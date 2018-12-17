@@ -12,15 +12,12 @@ class Main extends Component {
         super(props);
         this.state = {
           page: 'home',
-          crumbs : ["home", "courses", "sessions"]
+          crumbs : ["home", "sessions"]
         };
     }
 
     handleChildClick(header) {
         switch (header) {
-            case "courses":
-                this.setState({page : "courses"});
-                break;
             case "sessions":
                 this.setState({page : "sessions"});
                 break;
@@ -31,8 +28,6 @@ class Main extends Component {
                 this.setState({page : "home"});
                 break;
         }
-
-        console.log(this.state.page);
         
 
      }

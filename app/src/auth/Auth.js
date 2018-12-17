@@ -60,8 +60,13 @@ class Auth extends Component {
   }
 
   loginOk(response) {
-    sessionStorage.setItem('token', response.data.token);
-    sessionStorage.setItem('lvl', response.data.lvl);
+    sessionStorage.setItem('token', response.data.user.token);
+    sessionStorage.setItem('id', response.data.user.userId);
+    sessionStorage.setItem('lastname', response.data.user.lastname);
+    sessionStorage.setItem('firstname', response.data.user.firstname);
+    sessionStorage.setItem('address', response.data.user.address);
+    sessionStorage.setItem('phone', response.data.user.phone);
+    sessionStorage.setItem('courrielElectronique', response.data.user.courrielElectronique);
     this.setState({loginError : false});
     // A changer si possible, mauvaise méthode..
     //eslint-disable-next-line

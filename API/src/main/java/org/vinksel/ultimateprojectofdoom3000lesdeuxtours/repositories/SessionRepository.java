@@ -19,6 +19,7 @@ public class SessionRepository extends Repository {
 			instance = new SessionRepository();
 		return instance;
 	}
+	
 
 	@Override
 	protected Class getClassName()
@@ -26,6 +27,17 @@ public class SessionRepository extends Repository {
 		return className;
 	}
 	
+	public void registerSessionUser(Integer userId, Integer sessionId) {
+		org.hibernate.Session session = SessionFactoryHelper.getSessionFactory().openSession();
+		
+
+		Query query = session.createSQLQuery("INSERT INTO user_session (session_id,user_id) VALUES(:val1,:val2)");
+		query.setParameter("val1", sessionId);
+		query.setParameter("val2", userId);
+		query.executeUpdate();
+		
+		
+	}
 	public List<Session> sessionsForLocation(Location location)
 	{
 		org.hibernate.Session session = SessionFactoryHelper.getSessionFactory().openSession();

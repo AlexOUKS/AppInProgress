@@ -2,7 +2,9 @@ package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.controllers;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,18 +30,22 @@ import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.validators.Validators;
 public class SessionController {
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping("/session/{idSession}/register/{idUSer}") 
-	public ResponseEntity<?> register(@PathVariable Integer idSession, @PathVariable Integer idUSer)
+	public ResponseEntity<?> register(@RequestParam(value="idSession", required = true) Integer idSession,
+										@RequestParam(value="idUser", required = true) Integer idUser)
 	{
 		Session session;
 		User user;
 		try {
 			session = (Session) SessionRepository.getInstance().get(idSession);
-			user = (User) UserRepository.getInstance().get(idUSer);
-			
+			user = (User) UserRepository.getInstance().get(idUser);
+		/*
 			session.addUser(user);
-			
-			SessionRepository.getInstance().save(session);
-			UserRepository.getInstance().save(user);
+			user.addSession(session);
+			System.out.println(session);
+			System.out.println(session.getUsers().size());
+			SessionRepository.getInstance().save(session); */
+			SessionRepository.getInstance().registerSessionUser(idUser,idSession);
+
 		} catch (Exception e) {
 			return ResponseEntityHelper.responseForException(e);
 		}
@@ -78,9 +84,19 @@ public class SessionController {
 		} catch (Exception e) {
 			return ResponseEntityHelper.responseForException(e);
 		}
+		
         if (Validators.isArrayEmpty(sessions)) {
             return ResponseEntityHelper.voidList();
         } else {
+        	
+        	for (int i = 0; i < sessions.size() ; i++) {
+        		Session tmpSession = (Session) sessions.get(i);
+        		List<User> users = UserRepository.getInstance().getUsersFromSession(tmpSession.getId());
+        		if (!Validators.isNull(users)) {
+            		tmpSession.setStudents(users);
+        		}
+        		
+        	}
             return ResponseEntityHelper.objectList(sessions);
         }
 	}
