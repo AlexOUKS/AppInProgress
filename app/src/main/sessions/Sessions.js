@@ -34,23 +34,29 @@ class Sessions extends Component {
     
     manageSessions(sessions) {
         let sessionsHtml = [];
+        let lieuxHtml = [];
         let lieux = [];
         sessions.forEach(element => {
             let inscrit = <Button color="success" onClick={this.toggle.bind(this, element)}>S'inscrire</Button>;
             let students = 0;
             if (element.students != null) {
+                students = Object.keys(element.students).length;
                 element.students.forEach(student => {
-                    if (student == sessionStorage.getItem('id')) {
+                    if ((Math.round((students / element.max_students) * 100) == 100)) {
+                        inscrit = <b>Complet</b>
+                    } else if (student == sessionStorage.getItem('id')) {
                         inscrit = <Button color="danger" onClick={this.unregistertoggle.bind(this, element)}>Se déinscrire</Button>;
                     } 
                 });
 
-                students = Object.keys(element.students).length;
+                
 
             }
 
-            if (!lieux.includes(element.location.city))
-                lieux.push(<option>{element.location.city}</option>)
+            if (!lieux.includes(element.location.city)) {
+                lieux.push(element.location.city);
+                lieuxHtml.push(<option>{element.location.city}</option>)
+            }
 
             let dateStart = element.start_date.substring(0, element.start_date.indexOf('T'));
             let dateEnd = element.end_date.substring(0, element.end_date.indexOf('T'));
@@ -68,7 +74,7 @@ class Sessions extends Component {
             
         });
         this.setState({sessions : sessions,
-                        location : lieux,
+                        location : lieuxHtml,
                         sessionsHtml : sessionsHtml});
         
     }
@@ -92,13 +98,18 @@ class Sessions extends Component {
                 let inscrit = <Button color="success" onClick={this.toggle.bind(this, element)}>S'inscrire</Button>;
                 let students = 0;
                 if (element.students != null) {
+                    students = Object.keys(element.students).length;
+
                     element.students.forEach(student => {
-                        if (student == sessionStorage.getItem('id')) {
+                       
+                        if ((Math.round((students / element.max_students) * 100) == 100)) {
+                            inscrit = <b>Complet</b>
+                        } else if (student == sessionStorage.getItem('id')) {
                             inscrit = <Button color="danger" onClick={this.unregistertoggle.bind(this, element)}>Se déinscrire</Button>;
                         } 
                     });
 
-                    students = Object.keys(element.students).length;
+                   
 
                 }
 
