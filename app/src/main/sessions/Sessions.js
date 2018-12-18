@@ -35,7 +35,6 @@ class Sessions extends Component {
     manageSessions(sessions) {
         let sessionsHtml = [];
         let lieux = [];
-        console.log("ok");
         sessions.forEach(element => {
             let inscrit = <Button color="success" onClick={this.toggle.bind(this, element)}>S'inscrire</Button>;
             let students = 0;

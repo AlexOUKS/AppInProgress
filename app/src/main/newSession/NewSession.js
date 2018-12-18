@@ -10,9 +10,51 @@ class NewSession extends Component {
         this.state = {
         }
     }
-    
+
     render() {
-        return ("ici")
+        return (
+            <div>
+                <form>
+                    <legend>Création d'un cours</legend>
+                    <label for="code">Code : </label>
+                    <input 
+                        name="title"
+                        placeholder="Code (4 lettres)"
+                        maxLength="4"
+                        required="required"
+                        type="text"
+                    /><br />
+                    <label for="title">Titre : </label>
+                    <input 
+                        name="title"
+                        placeholder="Titre du cours"
+                        required="required"
+                        type="text"
+                    /><br />
+                    <label for="desc">Description : </label>
+                    <textarea 
+                        name="desc"
+                        placeholder="Description du cours"
+                        required="required"
+                        type="text"
+                    /><br />
+                    <button id="createCourse" >Créer le cours</button>
+                </form>
+
+                <form>
+                    <legend>Création d'une session</legend>
+                    <label for="code">Code : </label>
+                    <input 
+                        name="title"
+                        placeholder="Code (4 lettres)"
+                        maxLength="4"
+                        required="required"
+                        type="text"
+                    /><br />
+                    <button id="createSession" >Créer la session</button>
+                </form>
+            </div>
+        )
     }
 }
 
