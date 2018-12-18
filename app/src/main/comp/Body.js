@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Sessions from '../sessions/Sessions';
+import NewSession from '../newSession/NewSession';
 
 class Body extends Component {
     constructor(props) {
@@ -25,15 +26,10 @@ class Body extends Component {
         if(page == "home")
         {
             return(
-                <h2>Content home</h2>
+                <NewSession />
             )
         }
-        if(page == "courses")
-        {
-            return(
-                <h2>Content courses</h2>
-            )
-        }
+
         if(page == "sessions")
         {
             return(

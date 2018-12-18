@@ -28,15 +28,16 @@ import org.vinksel.ultimateprojectofdoom3000lesdeuxtours.validators.Validators;
 @RestController
 
 public class SessionController {
-	@RequestMapping("/session/register/{idSession}/{idUser}") 
-	public ResponseEntity<?> register(@PathVariable Integer idSession,
-			@PathVariable Integer idUser)
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping("/session/register") 
+	public ResponseEntity<?> register(@RequestParam(value="idSession", required = true) String idSession,
+			@RequestParam(value="idUser", required = true) String idUser)
 	{
 		Session session;
 		User user;
 		try {
-			session = (Session) SessionRepository.getInstance().get(idSession);
-			user = (User) UserRepository.getInstance().get(idUser);
+			session = (Session) SessionRepository.getInstance().get(Integer.parseInt(idSession));
+			user = (User) UserRepository.getInstance().get(Integer.parseInt(idUser));
 			
 			session.addUser(user);
  
@@ -49,7 +50,8 @@ public class SessionController {
 		return ResponseEntityHelper.createdElement();
 	}
 	
-	@RequestMapping("/session/unregister/") 
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping("/session/unregister") 
 	public ResponseEntity<?> unregister(
 			@RequestParam(value="idSession", required = true) Integer idSession,
 			@RequestParam(value="idUser", required = true) Integer idUser)
@@ -62,8 +64,7 @@ public class SessionController {
 			
 			session.rmUser(user);
 			
-			SessionRepository.getInstance().save(session);
-			UserRepository.getInstance().save(user);
+			SessionRepository.getInstance().update(user); 
 		} catch (Exception e) {
 			return ResponseEntityHelper.responseForException(e);
 		}

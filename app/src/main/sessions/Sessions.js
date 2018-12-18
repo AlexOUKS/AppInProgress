@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader, Input, Row, Col } from 'reactstrap';
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader, Input, Row, Col, Progress } from 'reactstrap';
 import './Sessions.css';
 
 class Sessions extends Component {    
@@ -10,6 +10,7 @@ class Sessions extends Component {
           sessions: [],
           sessionsHtml : [],
           modal : false,
+          deletemodal : false,
           element : {},
           location : []
         };
@@ -34,14 +35,14 @@ class Sessions extends Component {
     manageSessions(sessions) {
         let sessionsHtml = [];
         let lieux = [];
-        
+        console.log("ok");
         sessions.forEach(element => {
             let inscrit = <Button color="success" onClick={this.toggle.bind(this, element)}>S'inscrire</Button>;
             let students = 0;
             if (element.students != null) {
                 element.students.forEach(student => {
                     if (student == sessionStorage.getItem('id')) {
-                        inscrit = "Déja inscrit";
+                        inscrit = <Button color="danger" onClick={this.unregistertoggle.bind(this, element)}>Se déinscrire</Button>;
                     } 
                 });
 
@@ -62,14 +63,15 @@ class Sessions extends Component {
                 <td>{element.location.city}</td>
                 <td>{dateStart}</td>
                 <td>{dateEnd}</td>
-                <td>{Math.round((students / element.max_students) * 100)} %</td>
+                <td><Progress value={Math.round((students / element.max_students) * 100)} /> </td>
                 <td>{inscrit}</td>
             </tr>);
             
         });
         this.setState({sessions : sessions,
-                        location : lieux});
-        this.setState({sessionsHtml : sessionsHtml});
+                        location : lieux,
+                        sessionsHtml : sessionsHtml});
+        
     }
     getValues(event, field) {
         this.setState({
@@ -88,12 +90,12 @@ class Sessions extends Component {
             
             
             this.state.sessions.forEach(element => {
-                let inscrit = <Button color="success" onClick={this.toggle}>S'inscrire</Button>;
+                let inscrit = <Button color="success" onClick={this.toggle.bind(this, element)}>S'inscrire</Button>;
                 let students = 0;
                 if (element.students != null) {
                     element.students.forEach(student => {
                         if (student == sessionStorage.getItem('id')) {
-                            inscrit = "Déja inscrit";
+                            inscrit = <Button color="danger" onClick={this.unregistertoggle.bind(this, element)}>Se déinscrire</Button>;
                         } 
                     });
 
@@ -115,7 +117,7 @@ class Sessions extends Component {
                         <td>{element.location.city}</td>
                         <td>{dateStart}</td>
                         <td>{dateEnd}</td>
-                        <td>{Math.round((students / element.max_students) * 100)} %</td>
+                        <td><Progress value={Math.round((students / element.max_students) * 100)} /> </td>
                         <td>{inscrit}</td>
                     </tr>); 
                 } else
@@ -127,7 +129,7 @@ class Sessions extends Component {
                         <td>{element.location.city}</td>
                         <td>{dateStart}</td>
                         <td>{dateEnd}</td>
-                        <td>{Math.round((students / element.max_students) * 100)} %</td>
+                        <td><Progress value={Math.round((students / element.max_students) * 100)} /> </td>
                         <td>{inscrit}</td>
                     </tr>);
                 } else
@@ -139,7 +141,7 @@ class Sessions extends Component {
                         <td>{element.location.city}</td>
                         <td>{dateStart}</td>
                         <td>{dateEnd}</td>
-                        <td>{Math.round((students / element.max_students) * 100)} %</td>
+                        <td><Progress value={Math.round((students / element.max_students) * 100)} /> </td>
                         <td>{inscrit}</td>
                     </tr>);
                 } 
@@ -152,7 +154,7 @@ class Sessions extends Component {
                         <td>{element.location.city}</td>
                         <td>{dateStart}</td>
                         <td>{dateEnd}</td>
-                        <td>{Math.round((students / element.max_students) * 100)} %</td>
+                        <td><Progress value={Math.round((students / element.max_students) * 100)} /> </td>
                         <td>{inscrit}</td>
                     </tr>);
                 }
@@ -177,10 +179,66 @@ class Sessions extends Component {
         });
     }
 
-    register(element) {
-        this.toggle();
-        console.log(element);
+    unregistertoggle(element) {
+        this.setState({
+            deletemodal: !this.state.deletemodal,
+            "element" : element
+        });
     }
+
+    
+
+    
+  toForm(details) {
+    var formBody = [];
+    for (var property in details) {
+      var encodedKey = encodeURIComponent(property);
+      var encodedValue = encodeURIComponent(details[property]);
+      formBody.push(encodedKey + "=" + encodedValue);
+    }
+    formBody = formBody.join("&");
+    return formBody;
+  }
+
+    
+
+
+    register(element) {
+        let form = this.toForm({'idSession' : element.id,
+      'idUser' : sessionStorage.getItem('id')});
+
+        this.toggle(element);
+        axios.post(process.env.REACT_APP_API_URL+'/session/register', 
+            form,
+            {
+            headers : {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+            } 
+            )
+            .then(r => this.getSessions());
+        
+            
+    }
+
+    unregister(element) {
+        let form = this.toForm({'idSession' : element.id,
+      'idUser' : sessionStorage.getItem('id')});
+
+        this.unregistertoggle(element);
+        axios.post(process.env.REACT_APP_API_URL+'/session/unregister', 
+            form,
+            {
+            headers : {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+            } 
+            )
+            .then(r => this.getSessions());
+        
+            
+    }
+    
 
     
     render() {
@@ -213,15 +271,26 @@ class Sessions extends Component {
                     {this.state.sessionsHtml}
                 </tbody>
             </table>
-            <div>
+            <div>   
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
                 <ModalHeader toggle={this.toggle}>Inscription</ModalHeader>
                 <ModalBody>
-                    Voulez-vous vous inscrire dans ce cours ?
+                   Voulez-vous vous inscrire dans ce cours ?
                 </ModalBody>
                 <ModalFooter>
                     <Button color="success" onClick={this.register.bind(this, this.state.element)}>S'inscrire</Button>{' '}
-                    <Button color="secondary" onClick={this.toggle}>Annuler</Button>
+                    <Button color="secondary" onClick={this.toggle.bind(this, this.state.element)}>Annuler</Button>
+                </ModalFooter>
+                </Modal>
+
+                <Modal isOpen={this.state.deletemodal} toggle={this.unregistertoggle}>
+                <ModalHeader toggle={this.unregistertoggle}>Désinscription</ModalHeader>
+                <ModalBody>
+                    Voulez-vous vous déinscrire de ce cours ?
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="danger" onClick={this.unregister.bind(this, this.state.element)}>Se désinscrire</Button>{' '}
+                    <Button color="secondary" onClick={this.unregistertoggle.bind(this, this.state.element)}>Annuler</Button>
                 </ModalFooter>
                 </Modal>
           </div></div>)
