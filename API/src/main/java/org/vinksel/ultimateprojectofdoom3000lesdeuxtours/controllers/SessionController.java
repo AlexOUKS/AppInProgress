@@ -53,8 +53,8 @@ public class SessionController {
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping("/session/unregister") 
 	public ResponseEntity<?> unregister(
-			@RequestParam(value="idSession", required = true) String idSession,
-			@RequestParam(value="idUser", required = true) String idUser)
+			@RequestParam(value="idSession", required = true) Integer idSession,
+			@RequestParam(value="idUser", required = true) Integer idUser)
 	{
 		Session session;
 		User user;
