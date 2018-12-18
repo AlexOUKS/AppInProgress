@@ -20,16 +20,35 @@ public class Repository {
 		return instance;
 	};
 	
+	public void persist(Object obj) throws Exception{
+		Session session = SessionFactoryHelper.getSessionFactory().openSession();
+		try {
+			session.beginTransaction();
+			session.persist(obj);
+			session.getTransaction().commit();
+		}
+		catch(HibernateException e){throw e;}
+		finally {session.close();}
+	}
+	
 	public void update(Object obj) throws Exception{
 		Session session = SessionFactoryHelper.getSessionFactory().openSession();
-		try {session.update(obj);}
+		try {
+			session.beginTransaction();
+			session.update(obj);
+			session.getTransaction().commit();
+		}
 		catch(HibernateException e){throw e;}
 		finally {session.close();}
 	}
 
 	public void save(Object obj) throws Exception{
 		Session session = SessionFactoryHelper.getSessionFactory().openSession();
-		try {session.save(obj);}
+		try {
+			session.beginTransaction();
+			session.save(obj);
+			session.getTransaction().commit();
+		}
 		catch(Exception e){throw e;}
 		finally {session.close();}
 	}

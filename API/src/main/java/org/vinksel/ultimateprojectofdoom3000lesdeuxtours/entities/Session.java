@@ -51,7 +51,7 @@ public class Session {
 
 	@ManyToMany(mappedBy = "sessions", fetch = FetchType.EAGER)
 	@JsonIgnore
-	private Set<User> users;
+	private Set<User> users = new HashSet<User>();
 	
 	@Transient
 	private List students;

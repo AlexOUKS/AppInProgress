@@ -12,6 +12,7 @@ import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.DynamicUpdate; 
 
 @Entity
@@ -61,10 +62,9 @@ public class User{
 	private String token;
 	
 	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name="USER_SESSION", joinColumns= @JoinColumn(name="user_id"),
-				inverseJoinColumns = @JoinColumn(name ="session_id"))
-	
+	@ManyToMany(targetEntity = Session.class, fetch = FetchType.EAGER)
+	@JoinTable(name="User_Session", joinColumns= @JoinColumn(name="user_id", referencedColumnName = "user_id"),
+				inverseJoinColumns = @JoinColumn(name ="session_id", referencedColumnName = "session_id"))
 	private Set<Session> sessions =  new HashSet<Session>();
 
 	public User() {}
@@ -100,6 +100,7 @@ public class User{
 	}
 	
 	public Set<Session> getSessions() {
+		Hibernate.initialize(sessions);
 		return sessions;
 	}
 
