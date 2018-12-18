@@ -53,15 +53,16 @@ public class SessionController {
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping("/session/unregister") 
 	public ResponseEntity<?> unregister(
-			@RequestParam(value="idSession", required = true) Integer idSession,
-			@RequestParam(value="idUser", required = true) Integer idUser)
+			@RequestParam(value="idSession", required = true) String idSession,
+			@RequestParam(value="idUser", required = true) String idUser)
 	{
 		Session session;
 		User user;
+		System.out.println("ok");
 		try {
 			session = (Session) SessionRepository.getInstance().get(idSession);
 			user = (User) UserRepository.getInstance().get(idUser);
-			
+
 			session.rmUser(user);
 			
 			SessionRepository.getInstance().update(user); 
