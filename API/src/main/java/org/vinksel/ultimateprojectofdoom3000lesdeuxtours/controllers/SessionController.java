@@ -58,10 +58,11 @@ public class SessionController {
 	{
 		Session session;
 		User user;
+		System.out.println("ok");
 		try {
 			session = (Session) SessionRepository.getInstance().get(idSession);
 			user = (User) UserRepository.getInstance().get(idUser);
-			
+
 			session.rmUser(user);
 			
 			SessionRepository.getInstance().update(user); 

@@ -100,8 +100,7 @@ public class User{
 	}
 	
 	public Set<Session> getSessions() {
-		Hibernate.initialize(sessions);
-		return sessions;
+		return this.sessions;
 	}
 
 	public void setSessions(Set<Session> sessions) {
@@ -206,55 +205,10 @@ public class User{
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
-		if (courrielElectronique == null) {
-			if (other.courrielElectronique != null)
-				return false;
-		} else if (!courrielElectronique.equals(other.courrielElectronique))
-			return false;
-		if (firstname == null) {
-			if (other.firstname != null)
-				return false;
-		} else if (!firstname.equals(other.firstname))
-			return false;
-		if (grainsel == null) {
-			if (other.grainsel != null)
-				return false;
-		} else if (!grainsel.equals(other.grainsel))
-			return false;
-		if (lastname == null) {
-			if (other.lastname != null)
-				return false;
-		} else if (!lastname.equals(other.lastname))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (phone == null) {
-			if (other.phone != null)
-				return false;
-		} else if (!phone.equals(other.phone))
-			return false;
-		if (sessions == null) {
-			if (other.sessions != null)
-				return false;
-		} else if (!sessions.equals(other.sessions))
-			return false;
 		if (userId == null) {
 			if (other.userId != null)
 				return false;
 		} else if (!userId.equals(other.userId))
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
 			return false;
 		return true;
 	}
