@@ -23,7 +23,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Session {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotNull(message = "ID can not be null.")
 	@Column(name="session_id")
 	private Integer id;
 	

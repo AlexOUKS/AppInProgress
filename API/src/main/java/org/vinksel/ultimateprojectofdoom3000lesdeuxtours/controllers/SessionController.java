@@ -1,5 +1,7 @@
 package org.vinksel.ultimateprojectofdoom3000lesdeuxtours.controllers;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -58,7 +60,6 @@ public class SessionController {
 	{
 		Session session;
 		User user;
-		System.out.println("ok");
 		try {
 			session = (Session) SessionRepository.getInstance().get(idSession);
 			user = (User) UserRepository.getInstance().get(idUser);
@@ -101,8 +102,8 @@ public class SessionController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
-	@RequestMapping("/session/{id}/") 
-	public ResponseEntity<?> getSession(@PathVariable Integer id)
+	@RequestMapping("/session/view") 
+	public ResponseEntity<?> getSession(@RequestParam(value="id", defaultValue="null") Integer id)
 	{
 		Session session;
 		
@@ -120,17 +121,28 @@ public class SessionController {
 	public ResponseEntity<?> createSession(
 			@RequestParam(value="courseID", defaultValue="null") String courseID,
 			@RequestParam(value="locationID", defaultValue="null") Integer locationID,
-			@RequestParam(value="start_date", defaultValue="null") Date start_date,
-			@RequestParam(value="end_date", defaultValue="null") Date end_date,
+			@RequestParam(value="start_date", defaultValue="null") String start_date,
+			@RequestParam(value="end_date", defaultValue="null") String end_date,
 			@RequestParam(value="max_student", defaultValue="null") Integer max_student
 		)	
 	{
-		if(!Validators.isNull(courseID) || !Validators.isNull(locationID) || !Validators.isNull(start_date) || !Validators.isNull(end_date) || !Validators.isNull(max_student))
+		if(Validators.isNull(courseID) || Validators.isNull(locationID) || Validators.isNull(start_date) || Validators.isNull(end_date) || Validators.isNull(max_student))
 			return ResponseEntityHelper.badValues();
 		
+		Date start_date_obj = null;
+		Date end_date_obj = null;
+		
+		try {
+			start_date_obj = new SimpleDateFormat("yyyy-MM-dd").parse(start_date);
+			end_date_obj = new SimpleDateFormat("yyyy-MM-dd").parse(end_date);
+		} catch (ParseException e1) {
+			return ResponseEntityHelper.badValues();
+		}
+		
+		
 		Session session = new Session();
-		session.setStart_date(start_date);
-		session.setEnd_date(end_date);
+		session.setStart_date(start_date_obj);
+		session.setEnd_date(end_date_obj);
 		session.setMax_students(max_student);
 
 		try {
@@ -146,9 +158,9 @@ public class SessionController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
-	@RequestMapping("/session/edit/{id}") 
+	@RequestMapping("/session/edit/") 
 	public ResponseEntity<?> editSession(
-			@PathVariable Integer id, 
+			@RequestParam(value="id", defaultValue="null") Integer id, 
 			@RequestParam(value="courseID", defaultValue="null") String courseID,
 			@RequestParam(value="locationID", defaultValue="null") Integer locationID,
 			@RequestParam(value="start_date", defaultValue="null") Date start_date,
@@ -179,8 +191,8 @@ public class SessionController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
-	@RequestMapping("/session/delete/{id}") 
-	public ResponseEntity<?> deleteSession(@PathVariable Integer id)
+	@RequestMapping("/session/delete/") 
+	public ResponseEntity<?> deleteSession(@RequestParam(value="id", defaultValue="null") Integer id)
 	{
         try {
 			SessionRepository.getInstance().remove(id);

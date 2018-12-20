@@ -37,8 +37,8 @@ public class CourseController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
-	@RequestMapping("/course/view/{id}")
-	public ResponseEntity<?> getCourse(@PathVariable String id)
+	@RequestMapping("/course/view/")
+	public ResponseEntity<?> getCourse(@RequestParam(value="id", defaultValue="null") String id)
 	{
 		Course course;
         try {
@@ -50,8 +50,8 @@ public class CourseController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
-	@RequestMapping("/course/delete/{id}") 
-	public ResponseEntity<?> deleteCourse(@PathVariable String id)
+	@RequestMapping("/course/delete/") 
+	public ResponseEntity<?> deleteCourse(@RequestParam(value="id", defaultValue="null") String id)
 	{
         try {
 			CourseRepository.getInstance().remove(id);
@@ -62,8 +62,10 @@ public class CourseController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
-	@RequestMapping("/course/edit/{id}") 
-	public ResponseEntity<?> editCourse(@PathVariable String id, @RequestParam(value="code", defaultValue="null") String code,
+	@RequestMapping("/course/edit/") 
+	public ResponseEntity<?> editCourse(
+			@RequestParam(value="id", defaultValue="null") String id, 
+			@RequestParam(value="code", defaultValue="null") String code,
 			@RequestParam(value="title", defaultValue="null") String title,
 			@RequestParam(value="desc", defaultValue="null") String description)
 	{
@@ -92,7 +94,7 @@ public class CourseController {
 			@RequestParam(value="desc", defaultValue="null") String description
 		)	
 	{
-		if(!Validators.isNull(code) || !Validators.isNull(title) || !Validators.isNull(description))
+		if(Validators.isNull(code) || Validators.isNull(title) || Validators.isNull(description))
 			return ResponseEntityHelper.badValues();
 		
 		Course course = new Course(code, title, description);
